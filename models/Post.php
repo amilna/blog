@@ -1,0 +1,179 @@
+<?php
+
+namespace amilna\blog\models;
+
+use Yii;
+use dektrium\user\models\User;
+
+/**
+ * This is the model class for table "{{%blog_post}}".
+ *
+ * @property integer $id
+ * @property string $title
+ * @property string $description
+ * @property string $content
+ * @property string $tags
+ * @property string $image
+ * @property integer $author_id
+ * @property boolean $isfeatured
+ * @property integer $status
+ * @property string $time
+ * @property integer $isdel
+ *
+ * @property BlogCatPos[] $blogCatPos
+ * @property User $author
+ */
+class Post extends \yii\db\ActiveRecord
+{
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return '{{%blog_post}}';
+    }        
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['title', 'description', 'content'], 'required'],
+            [['content', 'image'], 'string'],
+            [['author_id', 'status', 'isdel'], 'integer'],
+            [['isfeatured'], 'boolean'],
+            [['time'], 'safe'],
+            [['title'], 'string', 'max' => 65],
+            [['description'], 'string', 'max' => 155],
+            [['tags'], 'string', 'max' => 255]
+        ];
+    }
+	
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app', 'ID'),
+            'title' => Yii::t('app', 'Title'),
+            'description' => Yii::t('app', 'Description'),
+            'content' => Yii::t('app', 'Content'),
+            'tags' => Yii::t('app', 'Tags'),
+            'image' => Yii::t('app', 'Image'),
+            'author_id' => Yii::t('app', 'Author ID'),
+            'isfeatured' => Yii::t('app', 'Is Featured?'),
+            'status' => Yii::t('app', 'Status'),
+            'time' => Yii::t('app', 'Time'),
+            'isdel' => Yii::t('app', 'Isdel'),
+        ];
+    }
+	
+	/* uncomment to undisplay deleted records (assumed the table has column isdel) */
+	public static function find()
+	{
+		return parent::find()->where(['{{%blog_post}}.isdel' => 0]);
+	}	
+
+	public function getTags()
+	{
+		$models = Post::find()->all();
+		$tags = [];
+		foreach ($models as $m)
+		{
+			$ts = explode(",",$m->tags);
+			foreach ($ts as $t)
+			{	
+				if (!in_array($t,$tags))
+				{
+					array_push($tags,$t);	
+				}
+			}	
+		}
+		return $tags;
+	}
+	
+	public function getRecent($limit = 5)
+	{
+		return Post::find()->orderBy('id desc')->limit($limit)->all();		
+	}
+	
+	public function getArchived($limit = 5)
+	{
+		$query =  new \yii\db\Query;
+        $query->select(["substring(concat('',time) from 1 for 7) as month"])
+				->from(Post::tableName()." as p")				
+				->groupBy("month")
+				->orderBy("month desc");
+				
+		$res = $query->all();		
+        
+        return ($res == null?[]:$res);        
+	}
+		
+    
+	public function itemAlias($list,$item = false,$bykey = false)
+	{
+		$lists = [
+			/* example list of item alias for a field with name field */
+			'status'=>[							
+							0=>Yii::t('app','Draft'),							
+							1=>Yii::t('app','Published'),
+							2=>Yii::t('app','Archived'),
+						],			
+			'isfeatured'=>[							
+							false=>Yii::t('app','No'),							
+							true=>Yii::t('app','Featured'),						
+						],				
+			
+		];				
+		
+		if (isset($lists[$list]))
+		{					
+			if ($bykey)
+			{				
+				$nlist = [];
+				foreach ($lists[$list] as $k=>$i)
+				{
+					$nlist[$i] = $k;
+				}
+				$list = $nlist;				
+			}
+			else
+			{
+				$list = $lists[$list];
+			}
+							
+			if ($item !== false)
+			{			
+				return	(isset($list[$item])?$list[$item]:false);
+			}
+			else
+			{
+				return $list;	
+			}			
+		}
+		else
+		{
+			return false;	
+		}
+	}    
+    
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBlogCatPos()
+    {
+        return $this->hasMany(BlogCatPos::className(), ['post_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuthor()
+    {
+        return $this->hasOne(User::className(), ['id' => 'author_id']);
+    }
+}
