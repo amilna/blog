@@ -20,15 +20,15 @@
 	"himiklab/yii2-colorbox-widget" : "*",
 	"amilna/yii2-yap" : "*"
     },
-    "autoload": {
-        "psr-4": {
-            "amilna\\blog\\": ""
-        }
-    },
     "repositories":[
 		{
 			"type": "git",
 			"url": "https://github.com/amilna/yap"
 		}
-   ]
+   ],
+    "autoload": {
+        "psr-4": {
+            "amilna\\blog\\": ""
+        }
+    }
 }
