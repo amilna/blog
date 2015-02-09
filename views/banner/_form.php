@@ -62,6 +62,7 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 			</div>
 
 			<?= $form->field($model, 'description')->textArea(['maxlength' => 155,'placeholder'=>Yii::t('app','This description also used as meta description')]) ?>			
+			<?= $form->field($model, 'url')->textInput(['maxlength' => 255,'placeholder'=>Yii::t('app','Link attached to the banner.. (start with http for external link)')]) ?>
 			
 			<?= $form->field($model, 'tags')->widget(Select2::classname(), [
 				'options' => [

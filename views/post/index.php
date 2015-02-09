@@ -9,6 +9,7 @@ use yii\widgets\ListView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Posts');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Blog'), 'url' => ['/blog/default']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="post-index">

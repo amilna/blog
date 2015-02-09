@@ -10,6 +10,7 @@ use amilna\yap\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Galleries');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Blog'), 'url' => ['/blog/default']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="gallery-index">

@@ -21,5 +21,38 @@ or add
 
 to the require section of your `composer.json` file.
 
+Since this extensions stil in dev stages, be sure also add following line in `composer.json` file.
+
+```json
+"repositories":[
+		{
+			"type": "git",
+			"url": "https://github.com/amilna/blog"
+		}	
+   ]
+```
+
+run migration for database
+
+```
+./yii migrate --migrationPath=@amilna/blog/migrations
+```
+
+add in modules section of main config
+
+```
+	'gridview' =>  [
+		'class' => 'kartik\grid\Module',
+	],
+	'cap' => [
+		'class' => 'amilna\blog\Module',
+	],
+```
+
+Usage
+-----
+
+Once the extension is installed, check the url:
+[your application base url]/index.php/blog
 
 

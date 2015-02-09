@@ -10,6 +10,7 @@ use amilna\blog\models\Post;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Posts');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Blog'), 'url' => ['/blog/default']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="post-index">
@@ -105,7 +106,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [				
 				'attribute'=>'isfeatured',				
 				'value'=>function($data){										
-					return $data->itemAlias('isfeatured',$data->isfeatured);
+					return $data->itemAlias('isfeatured',$data->isfeatured?1:0);
 				},
 				'filterType'=>GridView::FILTER_SELECT2,				
 				'filterWidgetOptions'=>[

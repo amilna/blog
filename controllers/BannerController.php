@@ -5,6 +5,7 @@ namespace amilna\blog\controllers;
 use Yii;
 use amilna\blog\models\Banner;
 use amilna\blog\models\BannerSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -34,8 +35,8 @@ class BannerController extends Controller
     public function actionIndex($format= false,$arraymap= false,$term = false)
     {
         $searchModel = new BannerSearch();        
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams+($term?['BannerSearch'=>[$arraymap=>$term]]:[]));
-
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams+($term?['BannerSearch'=>[$arraymap=>$term]]:[]));                                   
+				
         if ($format == 'json')
         {
 			$model = [];
@@ -77,9 +78,18 @@ class BannerController extends Controller
 		}
 		else
 		{
+			$bannerProvider = new ActiveDataProvider([
+				'models' => Banner::find()->where('status = true order by position asc')->all(),
+				'pagination'=>false,
+				/*'pagination' => [
+					'pageSize' => 20,
+				],*/
+			]);    
+			
 			return $this->render('index', [
 				'searchModel' => $searchModel,
 				'dataProvider' => $dataProvider,
+				'bannerProvider' => $bannerProvider,
 			]);
 		}	
     }

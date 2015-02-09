@@ -3,12 +3,14 @@
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ListView;
+use himiklab\colorbox\Colorbox;
 
 /* @var $this yii\web\View */
 /* @var $searchModel amilna\blog\models\GallerySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Galleries');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Blog'), 'url' => ['/blog/default']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="gallery-index">    
@@ -28,18 +30,18 @@ $this->params['breadcrumbs'][] = $this->title;
 		
 	<?= ListView::widget([
 		'dataProvider' => $dataProvider,
-		'itemOptions' => ['class' => 'col-md-3 col-sm-6 clearfix','tag'=>'ul'],
+		'itemOptions' => ['class' => 'pull-left','tag'=>'ul'],
 		//'summary'=>Yii::t('app','List of account codes where increase on receipt or revenues'),		
 		//'itemView'=>(isset($_GET['GallerySearch[album]'])?'_itemTag':'_itemAll'),	
 		'options' => ['class' => 'row text-center'],		
 		'layout'=>"{items}{pager}",
 		'itemView' => function ($model, $key, $index, $widget) {					
 						$html = '<div class="thumbnail">
-									<img src="'.$model->url.'" alt="'.$model->title.'">
-									<div class="caption">
+									<a href="'.$model->url.'" class="colorbox" title="'.$model->title.'"><img src="'.str_replace("/upload/","/upload/.thumbs/",$model->url).'" alt="'.$model->title.'"></a>
+									<!--<div class="caption">
 										<h4>'.Html::a($model->title,["//blog/gallery/view?id=".$model->id]).'</h4>
 										<p>'.$model->description.'</p>
-									</div>
+									</div>-->
 								</div>';
 										
 						return $html;
@@ -51,3 +53,15 @@ $this->params['breadcrumbs'][] = $this->title;
 	]) ?>	
 
 </div>
+
+<?= Colorbox::widget([
+    'targets' => [
+        '.colorbox' => [
+            'maxWidth' => 800,
+            'maxHeight' => 600,
+            'rel'=>'colorbox',
+            'slideshow'=>true
+        ],
+    ],
+    'coreStyle' => 1
+]) ?>

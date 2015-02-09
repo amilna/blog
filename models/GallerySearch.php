@@ -161,7 +161,10 @@ class GallerySearch extends Gallery
 				->orFilterWhere(['like','lower(tags)',strtolower($this->search)])
 				->orFilterWhere(['like','lower(url)',strtolower($this->search)]);
 		
-		$query->andFilterWhere(['like',"lower(concat(',',tags,',')",strtolower(",".$this->tag.",")]);				
+		if ($this->tag)
+		{
+			$query->andFilterWhere(['like',"lower(concat(',',tags,','))",strtolower(",".$this->tag.",")]);				
+		}
 		
         return $dataProvider;
     }

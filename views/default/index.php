@@ -1,12 +1,47 @@
+<?php
+use yii\helpers\Html;
+use yii\helpers\Url;
+
+?>
 <div class="blog-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
-    <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
-    </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
+    
+    <div class="jumbotron">
+		<h2>Yii2 Extensions for Blogging</h2>
+        <h1>Congratulations!</h1>
+        
+
+        <p class="lead">You have successfully installed Blog extension for your Yii-powered application.</p>
+
+        <p><?= Html::a(Yii::t('app','Get start to create a posting category'),['//blog/category/create'],["class"=>"btn btn-lg btn-success"])?></p>
+    </div>
+
+    <div class="body-content">
+
+        <div class="row">
+            <div class="col-lg-4">
+                <h2>Post</h2>
+
+                <p>Discrete entries of written work, especially with regard to its style or quality, typically displayed in reverse chronological order (the most recent post appears first).</p>
+
+                <p><?= Html::a(Yii::t('app','Go to Posts'),['//blog/post'],["class"=>"btn btn-primary"])?>
+                <?= Html::a(Yii::t('app','Manage Posts'),['//blog/post/admin'],["class"=>"btn btn-warning"])?></p>
+            </div>
+            <div class="col-lg-4">
+                <h2>Gallery</h2>
+
+                <p>Page that acts like a room or building for the display of works of art (especially images).</p>
+
+                <p><?= Html::a(Yii::t('app','Go to Galleries'),['//blog/gallery'],["class"=>"btn btn-primary"])?>
+                <?= Html::a(Yii::t('app','Manage Galleries'),['//blog/gallery/admin'],["class"=>"btn btn-warning"])?></p>
+            </div>
+            <div class="col-lg-4">
+                <h2>Banner</h2>
+
+                <p>Manage heading or advertisement appearing on a web page in the form of a bar, column, or box.</p>
+
+                <p><?= Html::a(Yii::t('app','Go to Banners'),['//blog/banner'],["class"=>"btn btn-primary"])?></p>
+            </div>
+        </div>
+
+    </div>
 </div>
