@@ -25,12 +25,11 @@ $this->params['breadcrumbs'][] = $this->title;
 		'targetId'=>'sequence',	//id of rendered sequencejs (the container will constructed by the widget with the given id)
 		'imageKey'=>'front_image', //model attribute to be used as image
 		'backgroundKey'=>'image', //model attribute to be used as background
-		'theme' => 'modern', //available themes: default, parallax, modern
+		'theme' => 'default', //available themes: default, parallax, modern
 		
 		//'css' => 'test.css', // url of css to overide default css relative from @web
 		
-		/* example to overide default themes */
-		/*
+		/* example to overide default themes		
 		'itemView'=>function ($model, $key, $widget) {					
 						$type = ['aeroplane','balloon','kite'];
 						$html = '<li>
@@ -44,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
 										
 						return $html;
 					},
-		
+		 */
 		
 		/*	example to overide default options	more options on http://sequencejs.com 
 		'options'=>[
@@ -56,8 +55,9 @@ $this->params['breadcrumbs'][] = $this->title;
 				'preloader'=> true,
 				'navigationSkip'=> false
 			],		
-		
-		/*	example to use widget without active data provider (the target selector should already rendered) */
+		 */
+		 	
+		/*	example to use widget without active data provider (the target selector should already rendered)
 		'targets' => [
 			'.sequencejs' => [
 				'autoPlay'=> true,
@@ -69,6 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				'navigationSkip'=> false
 			],
 		],
+		*/ 
 		
 	]) ?>    
     
