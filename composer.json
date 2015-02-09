@@ -18,7 +18,7 @@
 	"kartik-v/yii2-grid": "*",
 	"vova07/yii2-imperavi-widget": "*",
 	"himiklab/yii2-colorbox-widget" : "*",
-	"amilna/yii2-yap" : "*"
+	"amilna/yii2-yap": "dev-master"
     },
     "repositories":[
 		{
