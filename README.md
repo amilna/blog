@@ -28,6 +28,14 @@ Since this extensions stil in dev stages, be sure also add following line in `co
 		{
 			"type": "git",
 			"url": "https://github.com/amilna/blog"
+		},
+		{
+			"type": "git",
+			"url": "https://github.com/amilna/yap"
+		},
+		{
+			"type": "git",
+			"url": "https://github.com/amilna/yii2-sequence-widget"
 		}	
    ]
 ```
