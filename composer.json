@@ -18,12 +18,17 @@
 	"kartik-v/yii2-grid": "*",
 	"vova07/yii2-imperavi-widget": "*",
 	"himiklab/yii2-colorbox-widget" : "*",
-	"amilna/yii2-yap": "dev-master"
+	"amilna/yii2-yap": "dev-master",
+	"amilna/yii2-sequence-widget": "dev-master"
     },
     "repositories":[
 		{
 			"type": "git",
 			"url": "https://github.com/amilna/yap"
+		},
+		{
+			"type": "git",
+			"url": "https://github.com/amilna/yii2-sequence-widget"
 		}
    ],
     "autoload": {
