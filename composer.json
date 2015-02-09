@@ -17,7 +17,6 @@
 	"kartik-v/yii2-date-range": "*",
 	"kartik-v/yii2-grid": "*",
 	"vova07/yii2-imperavi-widget": "*",
-	"iutbay/yii2-kcfinder" : "*",
 	"amilna/yii2-yap" : "*"
     },
     "autoload": {

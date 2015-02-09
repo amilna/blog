@@ -19,28 +19,28 @@ $this->params['breadcrumbs'][] = $this->title;
 	<div class="row">
 		<!-- Blog Post -->
 		<div class="col-sm-8">
-			<div class="blog-post blog-single-post">
-				<div class="single-post-title">
+			<div>
+				<div>
 					<h3><?= $model->author->username ?> <small><i class="glyphicon glyphicon-time"></i>  <?= date('D d M, Y',strtotime($model->time)) ?> </small></h3>
 				</div>				
-				<div class="single-post-image">
+				<div>
 					<?php
 						if ($model->image != null)
 						{
 					?>
-						<img src="<?= $model->image ?>" alt="<?= $model->title ?>">
+						<img src="<?= $model->image ?>" alt="<?= $model->title ?>" style="width:100%;">
 					<?php		
 						}
 					?>					
 				</div>
-				<div class="single-post-content">
+				<div>
 					<?= $model->content ?>
 				</div>				
 			</div>
 		</div>
 		<!-- End Blog Post -->
 		<!-- Sidebar -->
-		<div class="col-sm-4 blog-sidebar">
+		<div class="col-sm-4">
 			<?php /*
 			<p>
 				<?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			</form>
 			
 			<h4>Recent Posts</h4>
-			<ul class="recent-posts">
+			<ul>
 				<?php
 					foreach ($model->getRecent() as $m)
 					{
@@ -74,11 +74,11 @@ $this->params['breadcrumbs'][] = $this->title;
 				?>		
 			</ul>
 			<h4>Categories</h4>
-			<ul class="blog-categories">
+			<ul>
 				<?php
 					foreach (Category::parents() as $c)
 					{
-						echo '<li>'.Html::a($c->title,["//blog/post/index?Post[category]=".$c->title]).'</li>';
+						echo '<li>'.Html::a($c->title,["//blog/post/index?PostSearch[category]=".$c->title]).'</li>';
 					}				
 				?>						
 			</ul>

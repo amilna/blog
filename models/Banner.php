@@ -66,22 +66,21 @@ class Banner extends \yii\db\ActiveRecord
         ];
     }
 	
-	/* uncomment to undisplay deleted records (assumed the table has column isdel)
+	/* uncomment to undisplay deleted records (assumed the table has column isdel) */
 	public static function find()
 	{
 		return parent::find()->where(['{{%blog_banner}}.isdel' => 0]);
-	}
-	*/
+	}	
     
 	public function itemAlias($list,$item = false,$bykey = false)
 	{
 		$lists = [
-			/* example list of item alias for a field with name field
-			'afield'=>[							
-							0=>Yii::t('app','an alias of 0'),							
-							1=>Yii::t('app','an alias of 1'),														
-						],			
-			*/			
+			/* example list of item alias for a field with name field */
+			'status'=>[							
+						0=>Yii::t('app','No'),							
+						1=>Yii::t('app','Yes'),														
+					],						
+						
 		];				
 		
 		if (isset($lists[$list]))
@@ -113,6 +112,50 @@ class Banner extends \yii\db\ActiveRecord
 		{
 			return false;	
 		}
-	}    
+	}  
+	
+	public function getTags()
+	{
+		$models = Banner::find()->all();
+		$tags = [];
+		foreach ($models as $m)
+		{
+			$ts = explode(",",$m->tags);
+			foreach ($ts as $t)
+			{	
+				if (!in_array($t,$tags))
+				{
+					array_push($tags,$t);	
+				}
+			}	
+		}
+		return $tags;
+	}  
+	
+	public function getLast()
+    {                
+        $res = $this->db->createCommand("SELECT 
+					count(id) 
+					FROM ".Banner::tableName()." 
+					WHERE isdel = :isdel")
+					->bindValues(["isdel"=>0])->queryScalar();		
+        
+        return ($res == null?0:$res);        
+    }
+    
+    public function updatePosition($position)
+    {                
+        $models = Banner::find()->where("position = :pos",["pos"=>$position])->one();
+        
+        if ($models)
+        {
+			$res = $this->db->createCommand("UPDATE ".Banner::tableName()." 
+						SET position = (position+1) 
+						WHERE position >= :pos AND id != :id")
+						->bindValues(["pos"=>$position,"id"=>$this->id])->execute();
+		}
+		
+        return $res;        
+    }        
     
 }

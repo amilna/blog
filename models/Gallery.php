@@ -55,29 +55,32 @@ class Gallery extends \yii\db\ActiveRecord
             'description' => Yii::t('app', 'Description'),
             'url' => Yii::t('app', 'Url'),
             'tags' => Yii::t('app', 'Tags'),
-            'status' => Yii::t('app', 'Status'),
+            'status' => Yii::t('app', 'Enable'),
             'type' => Yii::t('app', 'Type'),
             'time' => Yii::t('app', 'Time'),
             'isdel' => Yii::t('app', 'Isdel'),
         ];
     }
 	
-	/* uncomment to undisplay deleted records (assumed the table has column isdel)
+	/* uncomment to undisplay deleted records (assumed the table has column isdel) */
 	public static function find()
 	{
 		return parent::find()->where(['{{%blog_gallery}}.isdel' => 0]);
-	}
-	*/
+	}	
     
 	public function itemAlias($list,$item = false,$bykey = false)
 	{
 		$lists = [
-			/* example list of item alias for a field with name field
-			'afield'=>[							
-							0=>Yii::t('app','an alias of 0'),							
-							1=>Yii::t('app','an alias of 1'),														
-						],			
-			*/			
+			/* example list of item alias for a field with name field */
+			'type'=>[							
+						0=>Yii::t('app','Image'),							
+						1=>Yii::t('app','Movie'),														
+					],			
+			'status'=>[							
+						0=>Yii::t('app','No'),							
+						1=>Yii::t('app','Yes'),														
+					],						
+						
 		];				
 		
 		if (isset($lists[$list]))
@@ -110,5 +113,23 @@ class Gallery extends \yii\db\ActiveRecord
 			return false;	
 		}
 	}    
-    
+
+	public function getTags()
+	{
+		$models = Gallery::find()->all();
+		$tags = [];
+		foreach ($models as $m)
+		{
+			$ts = explode(",",$m->tags);
+			foreach ($ts as $t)
+			{	
+				if (!in_array($t,$tags))
+				{
+					array_push($tags,$t);	
+				}
+			}	
+		}
+		return $tags;
+	}
+   
 }

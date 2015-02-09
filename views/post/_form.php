@@ -10,6 +10,30 @@ use kartik\widgets\Select2;
 use kartik\widgets\SwitchInput;
 use kartik\datetime\DateTimePicker;
 use amilna\blog\models\Category;
+use iutbay\yii2kcfinder\KCFinderInputWidget;
+
+// kcfinder options
+// http://kcfinder.sunhater.com/install#dynamic
+$kcfOptions = array_merge([], [
+    'uploadURL' => Yii::getAlias('@web').'/upload',
+    'access' => [
+        'files' => [
+            'upload' => true,
+            'delete' => false,
+            'copy' => false,
+            'move' => false,
+            'rename' => false,
+        ],
+        'dirs' => [
+            'create' => true,
+            'delete' => false,
+            'rename' => false,
+        ],
+    ],    
+]);
+
+// Set kcfinder session options
+Yii::$app->session->set('KCFINDER', $kcfOptions);
 
 /* @var $this yii\web\View */
 /* @var $model amilna\blog\models\Post */
@@ -112,7 +136,14 @@ foreach ($model->blogCatPos as $c)
 					]);
 				?>
 				
-				<?= $form->field($model, 'image')->textarea(['rows' => 3]) ?>	
+				<?php 
+
+				echo $form->field($model, 'image')->widget(KCFinderInputWidget::className(), [
+					'multiple' => false,
+					'kcfOptions'=>$kcfOptions,					
+				]);
+				
+				?>	
 			</div>				
 		</div>
 	</div>

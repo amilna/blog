@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="post-index">
     
-    <div class="pull-right col-md-4 col-xs-6">
+    <div class="pull-right col-md-3 col-xs-6">
 		<form action="index" method="get">
 			<div class="input-group">
 				<input class="form-control input-md" name="PostSearch[search]" id="appendedInputButtons" type="text">
@@ -28,9 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
 		
 	<?= ListView::widget([
 		'dataProvider' => $dataProvider,
-		'itemOptions' => ['class' => 'row','tag'=>'div'],		
+		'itemOptions' => ['class' => 'col-md-3 col-sm-6','tag'=>'div'],		
 		//'summary'=>Yii::t('app','List of account codes where increase on receipt or revenues'),		
 		'itemView'=>'_itemIndex',
+		'options' => ['class' => 'row text-center'],		
 		'layout'=>"{items}\n{pager}",
 	]) ?>	
 

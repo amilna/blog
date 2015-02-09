@@ -168,7 +168,7 @@ class PostController extends Controller
     public function actionCreate()
     {
         $model = new Post();
-        $model->time = date("Y/m/d H:i:s");	
+        $model->time = date("Y-m-d H:i:s");	
         $model->author_id = Yii::$app->user->id;
 
         if (Yii::$app->request->post())        
@@ -178,13 +178,7 @@ class PostController extends Controller
 			$model->load($post);
 			if ($model->save()) {
 				
-				$cs = BlogCatPos::find()->where("post_id = :id",["id"=>$model->id])->all();
-				foreach ($cs as $c)
-				{
-					//$c->delete();
-					$c->isdel = 1;
-					$c->save();
-				}				
+				$cs = BlogCatPos::deleteAll("post_id = :id",["id"=>$model->id]);
 				
 				foreach ($category as $d)
 				{
@@ -226,15 +220,10 @@ class PostController extends Controller
 			$post = Yii::$app->request->post();						
 			$category = $post['Post']['category'];
 			$model->load($post);
+						
 			if ($model->save()) {
 				
-				$cs = BlogCatPos::find()->where("post_id = :id",["id"=>$model->id])->all();
-				foreach ($cs as $c)
-				{
-					//$c->delete();
-					$c->isdel = 1;
-					$c->save();
-				}				
+				$cs = BlogCatPos::deleteAll("post_id = :id",["id"=>$model->id]);				
 				
 				foreach ($category as $d)
 				{					
@@ -250,9 +239,7 @@ class PostController extends Controller
 				}
 								
 				return $this->redirect(['view', 'id' => $model->id]);            
-			} else {
-				$model->id = array_merge($category,[]);	
-			}
+			} 
 		}	
         
         return $this->render('update', [
