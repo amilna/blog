@@ -10,13 +10,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist amilna/yii2-blog "*"
+php composer.phar require --prefer-dist amilna/yii2-blog "dev-master"
 ```
 
 or add
 
 ```
-"amilna/yii2-blog": "*"
+"amilna/yii2-blog": "dev-master"
 ```
 
 to the require section of your `composer.json` file.
