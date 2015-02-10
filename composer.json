@@ -21,7 +21,21 @@
 	"aaiyo/yii2-kcfinder" : "dev-master",
 	"amilna/yii2-yap": "dev-master",
 	"amilna/yii2-sequence-widget": "dev-master"
-    },    
+    },
+    "repositories":[
+		{
+			"type": "git",
+			"url": "https://github.com/amilna/yap"
+		},
+		{
+			"type": "git",
+			"url": "https://github.com/amilna/yii2-sequence-widget"
+		},
+		{
+			"type": "git",
+			"url": "https://github.com/aaiyo/yii2-kcfinder"
+		}
+    ],	    
     "autoload": {
         "psr-4": {
             "amilna\\blog\\": ""
