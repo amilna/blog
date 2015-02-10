@@ -18,7 +18,7 @@
 	"kartik-v/yii2-grid": "*",
 	"vova07/yii2-imperavi-widget": "*",
 	"himiklab/yii2-colorbox-widget" : "*",
-	"iutbay/yii2fontawesome": "*",
+	"iutbay/yii2-fontawesome": "*",
 	"iutbay/yii2-kcfinder" : "dev-master",
 	"amilna/yii2-yap": "*"
     },
