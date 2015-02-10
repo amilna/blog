@@ -78,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				'value'=>'parent.title',
 				'filterType'=>GridView::FILTER_SELECT2,				
 				'filterWidgetOptions'=>[
-					'data'=>ArrayHelper::map(Category::parents(),"id","title"),
+					'data'=>ArrayHelper::map($searchModel->parents(),"id","title"),
 					'options' => ['placeholder' => Yii::t('app','Select a parent category...')],
 					'pluginOptions' => [
 						'allowClear' => true

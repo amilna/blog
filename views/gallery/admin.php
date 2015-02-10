@@ -84,8 +84,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'tags',
             [
 				'attribute'=>'status',
-				'value' => function($data,$model){					
-					return \amilna\blog\models\Gallery::itemAlias('status',$data->status?1:0);
+				'value' => function($data){					
+					return $data->itemAlias('status',$data->status?1:0);
 				},
 				/*
 				'format'=>'raw',
@@ -103,7 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				*/ 
 				'filterType'=>GridView::FILTER_SELECT2,				
 				'filterWidgetOptions'=>[
-					'data'=>$searchModel::itemAlias('status'),
+					'data'=>$searchModel->itemAlias('status'),
 					'options' => ['placeholder' => Yii::t('app','Select a status type...')],
 					'pluginOptions' => [
 						'allowClear' => true

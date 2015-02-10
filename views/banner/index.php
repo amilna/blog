@@ -147,11 +147,11 @@ $this->params['breadcrumbs'][] = $this->title;
             [
 				'attribute'=>'status',
 				'value' => function($data){					
-					return \amilna\blog\models\Banner::itemAlias('status',$data->status?1:0);
+					return $data->itemAlias('status',$data->status?1:0);
 				},				 
 				'filterType'=>GridView::FILTER_SELECT2,				
 				'filterWidgetOptions'=>[
-					'data'=>$searchModel::itemAlias('status'),
+					'data'=>$searchModel->itemAlias('status'),
 					'options' => ['placeholder' => Yii::t('app','Select a status type...')],
 					'pluginOptions' => [
 						'allowClear' => true

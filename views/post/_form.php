@@ -39,7 +39,8 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 /* @var $model amilna\blog\models\Post */
 /* @var $form yii\widgets\ActiveForm */
 
-$listCategory = []+ArrayHelper::map(Category::parents(), 'id', 'title');
+$cat = new Category();
+$listCategory = []+ArrayHelper::map($cat->parents(), 'id', 'title');
 $category = [];
 foreach ($model->blogCatPos as $c)
 {
@@ -107,7 +108,7 @@ foreach ($model->blogCatPos as $c)
 						'placeholder' => Yii::t('app','Put additional tags ...'),
 					],
 					'pluginOptions' => [
-						'tags' => $model::getTags(),
+						'tags' => $model->getTags(),
 					],
 				]) ?>		
 				

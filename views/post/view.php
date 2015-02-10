@@ -11,6 +11,8 @@ use amilna\blog\models\Category;
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Posts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$cat = new Category();
 ?>
 <div class="post-view">
 
@@ -76,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			<h4>Categories</h4>
 			<ul>
 				<?php
-					foreach (Category::parents() as $c)
+					foreach ($cat->parents() as $c)
 					{
 						echo '<li>'.Html::a($c->title,["//blog/post/index?PostSearch[category]=".$c->title]).'</li>';
 					}				

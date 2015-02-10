@@ -69,7 +69,7 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 					'placeholder' => Yii::t('app','Put additional tags ...'),
 				],
 				'pluginOptions' => [
-					'tags' => $model::getTags(),
+					'tags' => $model->getTags(),
 				],
 			]) ?>					
 		</div>	

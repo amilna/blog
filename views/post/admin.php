@@ -110,7 +110,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				},
 				'filterType'=>GridView::FILTER_SELECT2,				
 				'filterWidgetOptions'=>[
-					'data'=>Post::itemAlias('isfeatured'),
+					'data'=>$searchModel->temAlias('isfeatured'),
 					'options' => ['placeholder' => Yii::t('app','Is Featured?')],
 					'pluginOptions' => [
 						'allowClear' => true
@@ -125,7 +125,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				},
 				'filterType'=>GridView::FILTER_SELECT2,				
 				'filterWidgetOptions'=>[
-					'data'=>Post::itemAlias('status'),
+					'data'=>$searchModel->itemAlias('status'),
 					'options' => ['placeholder' => Yii::t('app','Filter by status...')],
 					'pluginOptions' => [
 						'allowClear' => true
