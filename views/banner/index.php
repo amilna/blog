@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		'targetId'=>'sequence',	//id of rendered sequencejs (the container will constructed by the widget with the given id)
 		'imageKey'=>'front_image', //model attribute to be used as image
 		'backgroundKey'=>'image', //model attribute to be used as background
-		'theme' => 'default', //available themes: default, parallax, modern
+		'theme' => 'parallax', //available themes: default, parallax, modern
 		
 		//'css' => 'test.css', // url of css to overide default css relative from @web
 		

@@ -33,7 +33,8 @@ class BannerController extends Controller
      * @return mixed
      */
     public function actionIndex($format= false,$arraymap= false,$term = false)
-    {
+    {      		
+        
         $searchModel = new BannerSearch();        
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams+($term?['BannerSearch'=>[$arraymap=>$term]]:[]));                                   
 				

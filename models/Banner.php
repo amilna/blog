@@ -145,16 +145,38 @@ class Banner extends \yii\db\ActiveRecord
     
     public function updatePosition($position)
     {                
-        $models = Banner::find()->where("position = :pos",["pos"=>$position])->one();
         
-        if ($models)
-        {
-			$res = $this->db->createCommand("UPDATE ".Banner::tableName()." 
-						SET position = (position+1) 
-						WHERE position >= :pos AND id != :id")
-						->bindValues(["pos"=>$position,"id"=>$this->id])->execute();
-		}
+        $models = Banner::find()->where("id != :id",["id"=>$this->id])->orderBy("position")->all();                
 		
+		$pos = 0;		
+		$mis = false;					
+		$low = false;
+		$up = false;	
+		$mod = "-";
+		$m = false;
+		
+        foreach ($models as $model)
+        {									
+			$mis = ($mis === false && $model->position != $pos?$pos:$mis);				
+			$pos = $pos+1;			
+			$m = $model;
+		}
+        
+        $alter = ($mis === false && $position > $pos?false:true);
+        $mis = ($mis === false?$m->position+1:$mis);
+        
+        $mod = ($position > $mis?"-":"+");
+        $low = ($position > $mis?$mis:$position);
+        $up = ($position < $mis?$mis:$position+1);
+                
+        $res = true;                        
+        if ($low !== false && $up !== false && $alter === true)
+        {								
+			$res = $this->db->createCommand("UPDATE ".Banner::tableName()." 
+						SET position = (position".$mod."1) 
+						WHERE position >= :low AND position < :up AND id != :id")
+						->bindValues(["low"=>$low,"up"=>$up,"id"=>$this->id])->execute();
+		}				
         return $res;        
     }        
     
