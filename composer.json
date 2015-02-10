@@ -18,21 +18,12 @@
 	"kartik-v/yii2-grid": "*",
 	"vova07/yii2-imperavi-widget": "*",
 	"himiklab/yii2-colorbox-widget" : "*",
-	"aaiyo/yii2-kcfinder" : "*",
-	"amilna/yii2-yap": "dev-master",
-	"amilna/yii2-sequence-widget": "dev-master"
+	"iutbay/yii2-kcfinder" : "*",
+	"amilna/yii2-yap": "*"
     },
-    "repositories":[
+    "repositories":[		
 		{
-			"type": "git",
-			"url": "https://github.com/amilna/yap"
-		},
-		{
-			"type": "git",
-			"url": "https://github.com/amilna/yii2-sequence-widget"
-		},
-		{
-			"type": "git",
+			"type": "vcs",
 			"url": "https://github.com/aaiyo/yii2-kcfinder"
 		}
     ],	    

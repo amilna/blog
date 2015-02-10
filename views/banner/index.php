@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ListView;
 use amilna\yap\GridView;
-use amilna\yap\widgets\SequenceJs;
+use amilna\yap\SequenceJs;
 
 
 /* @var $this yii\web\View */
