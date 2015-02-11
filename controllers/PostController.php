@@ -259,7 +259,7 @@ class PostController extends Controller
         $model->save();
         //$model->delete(); //this will true delete
         
-        return $this->redirect(['index']);
+        return $this->redirect(['admin']);
     }
 
     /**

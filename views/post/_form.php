@@ -98,7 +98,7 @@ foreach ($model->blogCatPos as $c)
 						'pluginOptions' => [
 							'format' => 'yyyy-MM-dd HH:i:s',
 							//'startDate' => '01-Mar-2014 12:00 AM',
-							'todayHighlight' => true
+							'todayHighlight' => true,							
 						]
 					]) 
 				?>
