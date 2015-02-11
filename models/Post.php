@@ -74,44 +74,7 @@ class Post extends \yii\db\ActiveRecord
 	public static function find()
 	{
 		return parent::find()->where(['{{%blog_post}}.isdel' => 0]);
-	}	
-
-	public function getTags()
-	{
-		$models = $this->find()->all();
-		$tags = [];
-		foreach ($models as $m)
-		{
-			$ts = explode(",",$m->tags);
-			foreach ($ts as $t)
-			{	
-				if (!in_array($t,$tags))
-				{
-					array_push($tags,$t);	
-				}
-			}	
-		}
-		return $tags;
-	}
-	
-	public function getRecent($limit = 5)
-	{
-		return Post::find()->orderBy('id desc')->limit($limit)->all();		
-	}
-	
-	public function getArchived($limit = 5)
-	{
-		$query =  new \yii\db\Query;
-        $query->select(["substring(concat('',time) from 1 for 7) as month"])
-				->from(Post::tableName()." as p")				
-				->groupBy("month")
-				->orderBy("month desc");
-				
-		$res = $query->all();		
-        
-        return ($res == null?[]:$res);        
-	}
-		
+	}			
     
 	public function itemAlias($list,$item = false,$bykey = false)
 	{
@@ -176,4 +139,41 @@ class Post extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'author_id']);
     }
+    
+    public function getTags()
+	{
+		$models = $this->find()->all();
+		$tags = [];
+		foreach ($models as $m)
+		{
+			$ts = explode(",",$m->tags);
+			foreach ($ts as $t)
+			{	
+				if (!in_array($t,$tags))
+				{
+					array_push($tags,$t);	
+				}
+			}	
+		}
+		return $tags;
+	}
+	
+	public function getRecent($limit = 5)
+	{
+		return $this->find()->orderBy('id desc')->limit($limit)->all();		
+	}
+	
+	public function getArchived($limit = 6)
+	{
+		$res =  $this->db->createCommand("SELECT 
+				substring(concat('',time) from 1 for 7) as month
+				FROM ".$this->tableName()." as p
+				GROUP BY month				
+				ORDER BY month desc
+				LIMIT :limit")
+				->bindValues(["limit"=>$limit])->queryAll();						
+        
+        return ($res == null?[]:$res);        
+	}
+
 }
