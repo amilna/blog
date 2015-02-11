@@ -45,7 +45,7 @@ add in modules section of main config
 	'gridview' =>  [
 		'class' => 'kartik\grid\Module',
 	],
-	'cap' => [
+	'blog' => [
 		'class' => 'amilna\blog\Module',
 	],
 ```
