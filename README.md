@@ -21,14 +21,11 @@ or add
 
 to the require section of your `composer.json` file.
 
-Since this extensions stil in dev stages, be sure also add following line in `composer.json` file.
+Since this extensions still use lib in dev stages, be sure also add following line in `composer.json` file.
 
 ```json
 "repositories":[
-		{
-			"type": "git",
-			"url": "https://github.com/amilna/blog"
-		},
+		
 		{
 			"type": "vcs",
 			"url": "https://github.com/aaiyo/yii2-kcfinder"

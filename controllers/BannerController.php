@@ -80,7 +80,7 @@ class BannerController extends Controller
 		else
 		{
 			$bannerProvider = new ActiveDataProvider([
-				'models' => Banner::find()->where('status = true order by position asc')->all(),
+				'models' => Banner::find()->where('status = true AND isdel = 0 order by position asc')->all(),
 				'pagination'=>false,
 				/*'pagination' => [
 					'pageSize' => 20,
