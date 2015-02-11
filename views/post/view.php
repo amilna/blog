@@ -29,9 +29,7 @@ $cat = new Category();
 					<?php
 						if ($model->image != null)
 						{
-					?>
-						<img src="<?= $model->image ?>" alt="<?= $model->title ?>" style="width:100%;">
-					<?php		
+							echo Html::img($model->image,["style"=>"width:100%;margin-bottom:20px;","alt"=>$model->title]);					
 						}
 					?>					
 				</div>

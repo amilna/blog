@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		
 	<?= ListView::widget([
 		'dataProvider' => $dataProvider,
-		'itemOptions' => ['class' => 'col-md-3 col-sm-6','tag'=>'div'],		
+		'itemOptions' => ['class' => 'col-md-4 col-sm-6','tag'=>'div'],		
 		//'summary'=>Yii::t('app','List of account codes where increase on receipt or revenues'),		
 		'itemView'=>'_itemIndex',
 		'options' => ['class' => 'row text-center'],		
