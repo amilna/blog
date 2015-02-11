@@ -1,6 +1,6 @@
 Blog for Yii
 ============
-Blogging module support for Yii2
+Blogging module support for Yii2 (includes banner and gallery, support mysql and postgresql)
 
 Installation
 ------------
