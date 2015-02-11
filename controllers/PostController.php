@@ -212,8 +212,7 @@ class PostController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-		$model->author_id = Yii::$app->user->id;
+        $model = $this->findModel($id);		
 		
 		if (Yii::$app->request->post())        
         {

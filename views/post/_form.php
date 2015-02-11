@@ -113,7 +113,7 @@ foreach ($model->blogCatPos as $c)
 				]) ?>		
 				
 				<div clas="form-group">
-					<label for="Psot[category]"><?= Yii::t('app','Category') ?></label>
+					<label for="Post[category]"><?= Yii::t('app','Category') ?></label>
 					<?= Select2::widget([
 						'name' => 'Post[category]', 
 						'data' => $listCategory,

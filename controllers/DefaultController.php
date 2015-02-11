@@ -16,30 +16,30 @@ class DefaultController extends Controller
     
     public function actions()
 	{
-		$url = Yii::$app->urlManager->baseUrl.'/static';
-		$path = '@webroot/static';				
+		$url = Yii::$app->urlManager->baseUrl.'/upload';
+		$path = '@webroot/upload';				
 		
 		return [
 			'image-upload' => [
 				'class' => 'vova07\imperavi\actions\UploadAction',
-				'url' => $url, // Directory URL address, where files are stored.
-				'path' => $path // Or absolute path to directory where files are stored.
+				'url' => $url.'/images', // Directory URL address, where files are stored.
+				'path' => $path.'/images' // Or absolute path to directory where files are stored.
 			],
 			'images-get' => [
 				'class' => 'vova07\imperavi\actions\GetAction',
-				'url' => $url, // Directory URL address, where files are stored.
-				'path' => $path, // Or absolute path to directory where files are stored.
+				'url' => $url.'/images', // Directory URL address, where files are stored.
+				'path' => $path.'/images', // Or absolute path to directory where files are stored.
 				'type' => GetAction::TYPE_IMAGES,
 			],
 			'file-upload' => [
 				'class' => 'vova07\imperavi\actions\UploadAction',
-				'url' => $url, // Directory URL address, where files are stored.
-				'path' => $path // Or absolute path to directory where files are stored.
+				'url' => $url.'/files', // Directory URL address, where files are stored.
+				'path' => $path.'/files' // Or absolute path to directory where files are stored.
 			],
 			'files-get' => [
 				'class' => 'vova07\imperavi\actions\GetAction',
-				'url' => $url, // Directory URL address, where files are stored.
-				'path' => $path, // Or absolute path to directory where files are stored.
+				'url' => $url.'/files', // Directory URL address, where files are stored.
+				'path' => $path.'/files', // Or absolute path to directory where files are stored.
 				'type' => GetAction::TYPE_FILES,
 			],
 			

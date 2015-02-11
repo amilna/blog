@@ -6,8 +6,6 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use amilna\blog\models\Post;
-use amilna\blog\models\Category;
-use dektrium\user\models\User;
 
 /**
  * PostSearch represents the model behind the search form about `amilna\blog\models\Post`.
@@ -180,7 +178,7 @@ class PostSearch extends Post
 			$term = ($this->search?$this->search:$this->category);
 			$cquery =  new \yii\db\Query;
 			$cquery->select(["p.id"])
-					->from(Post::tableName()." as p")
+					->from("{{%blog_post}} as p")
 					->leftJoin("{{%blog_cat_pos}} as cp","p.id = cp.post_id")
 					->leftJoin("{{%blog_category}} as c","cp.category_id = c.id");
 					
