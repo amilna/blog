@@ -163,7 +163,9 @@ class Banner extends \yii\db\ActiveRecord
 		}
         
         $alter = ($mis === false && $position > $pos?false:true);
-        $mis = ($mis === false?$m->position+1:$mis);
+        if ($m) {
+			$mis = ($mis === false?$m->position+1:$mis);
+		}
         
         $mod = ($position > $mis?"-":"+");
         $low = ($position > $mis?$mis:$position);
