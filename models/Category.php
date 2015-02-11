@@ -65,12 +65,7 @@ class Category extends \yii\db\ActiveRecord
 	public static function find()
 	{
 		return parent::find()->where(['{{%blog_category}}.isdel' => 0]);
-	}	
-
-    public function	parents($id = false)
-    {
-		return Category::findBySql("SELECT id,title FROM ".Category::tableName().($id?" WHERE id != :id":"")." order by title",($id?['id'=>$id]:[]))->all();		
-	}	
+	}	    
     
 	public function itemAlias($list,$item = false,$bykey = false)
 	{
@@ -138,4 +133,9 @@ class Category extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Category::className(), ['parent_id' => 'id']);
     }
+    
+    public function	parents($id = false)
+    {
+		return $this->findBySql("SELECT id,title FROM ".$this->tableName().($id?" WHERE id != :id":"")." order by title",($id?['id'=>$id]:[]))->all();
+	}	
 }

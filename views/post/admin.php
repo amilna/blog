@@ -110,7 +110,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				},
 				'filterType'=>GridView::FILTER_SELECT2,				
 				'filterWidgetOptions'=>[
-					'data'=>$searchModel->temAlias('isfeatured'),
+					'data'=>$searchModel->itemAlias('isfeatured'),
 					'options' => ['placeholder' => Yii::t('app','Is Featured?')],
 					'pluginOptions' => [
 						'allowClear' => true

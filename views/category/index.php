@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use amilna\yap\GridView;
-use amilna\blog\models\Category;
 
 /* @var $this yii\web\View */
 /* @var $searchModel amilna\blog\models\CategorySearch */

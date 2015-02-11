@@ -78,7 +78,7 @@ class Post extends \yii\db\ActiveRecord
 
 	public function getTags()
 	{
-		$models = Post::find()->all();
+		$models = $this->find()->all();
 		$tags = [];
 		foreach ($models as $m)
 		{
