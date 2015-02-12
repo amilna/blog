@@ -3,7 +3,7 @@
 namespace amilna\blog\models;
 
 use Yii;
-use dektrium\user\models\User;
+
 
 /**
  * This is the model class for table "{{%blog_post}}".
@@ -137,7 +137,8 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getAuthor()
     {
-        return $this->hasOne(User::className(), ['id' => 'author_id']);
+        $userClass = Yii::$app->getModule('blog')->userClass;        
+        return $this->hasOne($userClass::className(), ['id' => 'author_id']);
     }
     
     public function getTags()

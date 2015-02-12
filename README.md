@@ -47,6 +47,7 @@ add in modules section of main config
 	],
 	'blog' => [
 		'class' => 'amilna\blog\Module',
+		/* 'userClass' => 'dektrium\user\models\User', // example if use another user class */
 	],
 ```
 
