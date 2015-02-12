@@ -166,7 +166,8 @@ class PostSearch extends Post
 			$query->andFilterWhere($p);
 		}
 		
-		$query->andFilterWhere(['like','lower({{%user}}.username)',strtolower($this->author)]);
+		$userClass = Yii::$app->getModule('blog')->userClass;
+		$query->andFilterWhere(['like','lower('.$userClass::tableName().'.username)',strtolower($this->author)]);
 		
 		$query->andFilterWhere(['like','lower(title)',strtolower($this->search)])
 				->orFilterWhere(['like','lower(description)',strtolower($this->search)])
