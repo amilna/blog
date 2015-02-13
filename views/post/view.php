@@ -53,7 +53,7 @@ $cat = new Category();
 				]) ?>
 			</p>
 			*/ ?> 
-			<h4>Search our Blog</h4>
+			<h4><?= Yii::t("app","Search our Posts")?></h4>
 			
 			<form action="index" method="get">
 				<div class="input-group">
@@ -63,8 +63,8 @@ $cat = new Category();
 					</span>
 				</div>
 			</form>
-			
-			<h4>Recent Posts</h4>
+			<hr>
+			<h4><?= Yii::t("app","Recent Posts")?></h4>
 			<ul>
 				<?php
 					foreach ($model->getRecent() as $m)
@@ -73,7 +73,8 @@ $cat = new Category();
 					}				
 				?>		
 			</ul>
-			<h4>Categories</h4>
+			<hr>
+			<h4><?= Yii::t("app","Categories")?></h4>
 			<ul>
 				<?php
 					foreach ($cat->parents() as $c)
@@ -82,7 +83,8 @@ $cat = new Category();
 					}				
 				?>						
 			</ul>
-			<h4>Archive</h4>
+			<hr>
+			<h4><?= Yii::t("app","Archive")?></h4>
 			<ul>
 				<?php
 					foreach ($model->getArchived() as $m)
