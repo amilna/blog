@@ -155,11 +155,18 @@ class BannerSearch extends Banner
 			$query->andFilterWhere($p);
 		}
 		
-		$query->andFilterWhere(['like','lower(title)',strtolower($this->search)])
-				->orFilterWhere(['like','lower(description)',strtolower($this->search)])
-				->orFilterWhere(['like','lower(tags)',strtolower($this->search)])
-				->orFilterWhere(['like','lower(image)',strtolower($this->search)])
-				->orFilterWhere(['like','lower(front_image)',strtolower($this->search)]);
+		if ($this->search)
+		{
+			$query->andFilterWhere(["OR","lower(title) like '%".strtolower($this->search)."%'",
+				["OR","lower(description) like '%".strtolower($this->search)."%'",
+					["OR","lower(tags) like '%".strtolower($this->search)."%'",
+						["OR","lower(image) like '%".strtolower($this->search)."%'",
+							"lower(front_image) like '%".strtolower($this->search)."%'"
+						]
+					]
+				]
+			]);	
+		}				
 				
         return $dataProvider;
     }

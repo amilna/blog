@@ -20,7 +20,7 @@
 	"himiklab/yii2-colorbox-widget" : "*",
 	"iutbay/yii2-fontawesome": "*",
 	"iutbay/yii2-kcfinder" : "dev-master",
-	"amilna/yii2-yap": "*"
+	"amilna/yii2-yap": "dev-master"
     },
     "repositories":[		
 		{

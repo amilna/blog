@@ -154,17 +154,21 @@ class GallerySearch extends Gallery
 		foreach ($params as $p)
 		{
 			$query->andFilterWhere($p);
-		}
+		}		
 		
-		$query->andFilterWhere(['like','lower(title)',strtolower($this->search)])
-				->orFilterWhere(['like','lower(description)',strtolower($this->search)])
-				->orFilterWhere(['like','lower(tags)',strtolower($this->search)])
-				->orFilterWhere(['like','lower(url)',strtolower($this->search)]);
-		
-		if ($this->tag)
+		if ($this->search)
 		{
-			$query->andFilterWhere(['like',"lower(concat(',',tags,','))",strtolower(",".$this->tag.",")]);				
+			$query->andFilterWhere(["OR","lower(title) like '%".strtolower($this->search)."%'",
+				["OR","lower(description) like '%".strtolower($this->search)."%'",
+					["OR","lower(tags) like '%".strtolower($this->search)."%'",
+						"lower(url) like '%".strtolower($this->search)."%'"
+					]
+				]
+			]);	
 		}
+		
+		$query->andFilterWhere(['like',"lower(concat(',',tags,','))",strtolower(",".$this->tag.",")]);				
+		
 		
         return $dataProvider;
     }
