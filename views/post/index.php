@@ -15,15 +15,15 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="post-index">
     
     <div class="pull-right col-md-3 col-xs-6">
-		<form action="index" method="get">
+		<form action="<?=Yii::$app->urlManager->createUrl("//blog/post")?>" method="get">
 			<div class="input-group">
 				<input class="form-control input-md" name="PostSearch[search]" id="appendedInputButtons" type="text">
 				<span class="input-group-btn">
-					<button class="btn btn-md" type="button">Search</button>
+					<button class="btn btn-md" type="submit">Search</button>
 				</span>
 			</div>
 		</form>
-	</div>
+	</div>		
 	<h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>    
 		
