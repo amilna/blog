@@ -34,7 +34,7 @@ class CategoryController extends Controller
     public function actionIndex($format= false,$arraymap= false,$term = false)
     {
         $searchModel = new CategorySearch();        
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams+($term?['CategorySearch'=>[$arraymap=>$term]]:[]));
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams+($term?['CategorySearch'=>['search'=>$term]]:[]));
 
         if ($format == 'json')
         {
@@ -45,7 +45,7 @@ class CategoryController extends Controller
 				if ($arraymap)
 				{
 					$map = explode(",",$arraymap);
-					if (count($map) == 1 || $term)
+					if (count($map) == 1)
 					{
 						$obj = $d[$arraymap];
 					}
@@ -56,7 +56,7 @@ class CategoryController extends Controller
 						{
 							$k = explode(":",$a);						
 							$v = (count($k) > 1?$k[1]:$k[0]);
-							$obj[$k[0]] = (isset($d[$v])?$d[$v]:null);
+							$obj[$k[0]] = ($v == "Obj"?json_encode($d->attributes):(isset($d[$v])?$d[$v]:null));
 						}
 					}
 				}

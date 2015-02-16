@@ -36,7 +36,7 @@ class BannerController extends Controller
     {      		
         
         $searchModel = new BannerSearch();        
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams+($term?['BannerSearch'=>[$arraymap=>$term]]:[]));                                   
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams+($term?['BannerSearch'=>['search'=>$term]]:[]));
 				
         if ($format == 'json')
         {
@@ -47,7 +47,7 @@ class BannerController extends Controller
 				if ($arraymap)
 				{
 					$map = explode(",",$arraymap);
-					if (count($map) == 1 || $term)
+					if (count($map) == 1)
 					{
 						$obj = $d[$arraymap];
 					}
@@ -58,7 +58,7 @@ class BannerController extends Controller
 						{
 							$k = explode(":",$a);						
 							$v = (count($k) > 1?$k[1]:$k[0]);
-							$obj[$k[0]] = (isset($d[$v])?$d[$v]:null);
+							$obj[$k[0]] = ($v == "Obj"?json_encode($d->attributes):(isset($d[$v])?$d[$v]:null));
 						}
 					}
 				}
