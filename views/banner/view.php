@@ -9,6 +9,8 @@ use yii\widgets\DetailView;
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Banners'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$module = Yii::$app->getModule('blog');
 ?>
 <div class="banner-view">
 
@@ -24,22 +26,33 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'title',
-            'description',
-            'image:ntext',
-            'front_image:ntext',
-            'tags',
-            'url:url',
-            'status:boolean',
-            'position',
-            'time',
-            'isdel',
-        ],
-    ]) ?>
-
+	
+	<div class="row">
+		<div class="col-xs-8">
+			<?= Html::img($model->image,["style"=>"max-width:100%"])?>
+		</div>		
+		<div class="col-xs-4">
+			<?= DetailView::widget([
+				'model' => $model,
+				'attributes' => [
+					'id',
+					'title',
+					'description',            
+					[
+						'attribute'=>'front_image',
+						'format'=>'html',
+						'value'=>(!empty($model->front_image)?(Html::img(str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$model->front_image),["class"=>"thumbnail","style"=>"max-width:100%"])):''),
+					],  				  
+					'tags',
+					'url:url',
+					'status:boolean',
+					'position',
+					'time',
+					//'isdel',
+				],
+			]) ?>
+		</div>
+	</div>
+	
+    
 </div>

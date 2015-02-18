@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	<div class="row">
 		<div class="col-xs-8">
-			<?= Html::img($model->url,["style"=>"width:100%"])?>
+			<?= Html::img($model->url,["style"=>"max-width:100%"])?>
 		</div>
 		<div class="col-xs-4">
 			<?= DetailView::widget([

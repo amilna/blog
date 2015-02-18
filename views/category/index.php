@@ -11,6 +11,8 @@ use amilna\yap\GridView;
 $this->title = Yii::t('app', 'Categories');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Blog'), 'url' => ['/blog/default']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$module = Yii::$app->getModule('blog');
 ?>
 <div class="category-index">
 
@@ -89,8 +91,8 @@ $this->params['breadcrumbs'][] = $this->title;
             [
 				'attribute' => 'image',
 				'format'=>'html',
-				'value' => function($data){
-					return ($data->image!= null?Html::img(str_replace("/upload/","/upload/.thumbs/",$data->image),['class'=>'pull-left','style'=>'margin:0 10px 10px 0']):'');
+				'value' => function($data) use ($module) {
+					return ($data->image!= null?Html::img(str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$data->image),['class'=>'pull-left','style'=>'margin:0 10px 10px 0']):'');
 				},
             ],            
             // 'status:boolean',

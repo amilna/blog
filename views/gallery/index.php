@@ -12,6 +12,8 @@ use himiklab\colorbox\Colorbox;
 $this->title = Yii::t('app', 'Galleries');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Blog'), 'url' => ['/blog/default']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$module = Yii::$app->getModule('blog');
 ?>
 <div class="gallery-index">    
     
@@ -35,9 +37,9 @@ $this->params['breadcrumbs'][] = $this->title;
 		//'itemView'=>(isset($_GET['GallerySearch[album]'])?'_itemTag':'_itemAll'),	
 		'options' => ['class' => 'row text-center'],		
 		'layout'=>"{items}{pager}",
-		'itemView' => function ($model, $key, $index, $widget) {					
+		'itemView' => function ($model, $key, $index, $widget) use ($module) {					
 						$html = '<div class="thumbnail">
-									<a href="'.$model->url.'" class="colorbox" title="'.$model->title.'"><img src="'.str_replace("/upload/","/upload/.thumbs/",$model->url).'" alt="'.$model->title.'"></a>
+									<a href="'.$model->url.'" class="colorbox" title="'.$model->title.'"><img src="'.str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$model->url).'" alt="'.$model->title.'"></a>
 									<!--<div class="caption">
 										<h4>'.Html::a($model->title,["//blog/gallery/view?id=".$model->id]).'</h4>
 										<p>'.$model->description.'</p>

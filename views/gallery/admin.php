@@ -12,6 +12,8 @@ use amilna\yap\GridView;
 $this->title = Yii::t('app', 'Galleries');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Blog'), 'url' => ['/blog/default']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$module = Yii::$app->getModule('blog');
 ?>
 <div class="gallery-index">
 
@@ -75,8 +77,8 @@ $this->params['breadcrumbs'][] = $this->title;
             [
 				'attribute' => 'title',
 				'format'=>'html',
-				'value' => function($data){
-					return Html::img(str_replace("/upload/","/upload/.thumbs/",$data->url),['class'=>'pull-left','style'=>'margin:0 10px 10px 0'])." ".$data->title;
+				'value' => function($data) use ($module) {
+					return Html::img(str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$data->url),['class'=>'pull-left','style'=>'margin:0 10px 10px 0'])." ".$data->title;
 				},
             ],            
             //'title',

@@ -12,7 +12,7 @@ use yii\helpers\Url;
 
         <p class="lead">You have successfully installed Blog extension for your Yii-powered application.</p>
 
-        <p><?= Html::a(Yii::t('app','Get start to create a posting category'),['//blog/category/create'],["class"=>"btn btn-lg btn-success"])?></p>
+        <p><?= Html::a(Yii::t('app','Get start to manage posting category'),['//blog/category'],["class"=>"btn btn-lg btn-success"])?></p>
     </div>
 
     <div class="body-content">

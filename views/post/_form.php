@@ -12,10 +12,12 @@ use kartik\datetime\DateTimePicker;
 use amilna\blog\models\Category;
 use iutbay\yii2kcfinder\KCFinderInputWidget;
 
+$module = Yii::$app->getModule('blog');
 // kcfinder options
 // http://kcfinder.sunhater.com/install#dynamic
 $kcfOptions = array_merge([], [
-    'uploadURL' => Yii::getAlias('@web').'/upload',
+    'uploadURL' => Yii::getAlias('@web').'/'.$module->uploadDir,
+    'uploadDir' => Yii::getAlias('@webroot').'/'.$module->uploadDir,
     'access' => [
         'files' => [
             'upload' => true,

@@ -5,18 +5,18 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model amilna\cap\models\AccountCode */
-
+$module = Yii::$app->getModule('blog');
 ?>
 
 	<div class="thumbnail">	
 	
-		<div style="<?=($model->image != null?"background-size:cover;background-image:url('".str_replace("/upload/","/upload/.thumbs/",$model->image)."')":"")?>" >
+		<div style="<?=($model->image != null?"background-size:cover;background-image:url('".str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$model->image)."')":"")?>" >
 		<?php
 			if ($model->image != null)
 			{
-				//echo Html::tag("div","",["style"=>'height:100%;width:100px;background-size:cover;background-image:url("'.str_replace("/upload/","/upload/.thumbs/",$model->image).'")']);
+				//echo Html::tag("div","",["style"=>'height:100%;width:100px;background-size:cover;background-image:url("'.str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$model->image).'")']);
 		/*?>
-			<img src="<?= str_replace("/upload/","/upload/.thumbs/",$model->image) ?>" alt="<?= $model->title ?>" style="float:left;padding: 0 5px 5px 0;">
+			<img src="<?= str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$model->image) ?>" alt="<?= $model->title ?>" style="float:left;padding: 0 5px 5px 0;">
 		<?php		*/
 			}
 		?>									
