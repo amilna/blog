@@ -31,7 +31,11 @@ $kcfOptions = array_merge([], [
             'delete' => false,
             'rename' => false,
         ],
-    ],    
+    ],  
+    'types'=>[
+		'files'    =>  "",        
+        'images'   =>  "*img",
+    ]      
 ]);
 
 // Set kcfinder session options
@@ -91,7 +95,7 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 					'multiple' => false,
 					'kcfOptions'=>$kcfOptions,	
 					'kcfBrowseOptions'=>[
-						'type'=>'image'				
+						'type'=>'images'				
 					]	
 				]);	
 			?>							

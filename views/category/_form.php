@@ -32,6 +32,10 @@ $kcfOptions = array_merge([], [
             'rename' => false,
         ],
     ],    
+    'types'=>[
+		'files'    =>  "",        
+        'images'   =>  "*img",
+    ]    
 ]);
 
 // Set kcfinder session options
@@ -88,7 +92,7 @@ $listParent = []+ArrayHelper::map(($model->isNewRecord?$model->parents():$model-
 					'multiple' => false,
 					'kcfOptions'=>$kcfOptions,	
 					'kcfBrowseOptions'=>[
-						'type'=>'image'				
+						'type'=>'images'				
 					]	
 				]);	
 			?>							

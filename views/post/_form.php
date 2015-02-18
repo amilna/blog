@@ -31,7 +31,11 @@ $kcfOptions = array_merge([], [
             'delete' => false,
             'rename' => false,
         ],
-    ],    
+    ], 
+    'types'=>[
+		'files'    =>  "",        
+        'images'   =>  "*img",
+    ]       
 ]);
 
 // Set kcfinder session options
@@ -145,6 +149,9 @@ foreach ($model->blogCatPos as $c)
 				echo $form->field($model, 'image')->widget(KCFinderInputWidget::className(), [
 					'multiple' => false,
 					'kcfOptions'=>$kcfOptions,					
+					'kcfBrowseOptions'=>[
+						'type'=>'images'				
+					]					
 				]);
 				
 				?>	
