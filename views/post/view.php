@@ -65,7 +65,7 @@ $cat = new Category();
 			</form>
 			<hr>
 			<h4><?= Yii::t("app","Recent Posts")?></h4>
-			<ul>
+			<ul class="list-unstyled">
 				<?php
 					foreach ($model->getRecent() as $m)
 					{
@@ -75,7 +75,7 @@ $cat = new Category();
 			</ul>
 			<hr>
 			<h4><?= Yii::t("app","Categories")?></h4>
-			<ul>
+			<ul class="nav nav-pills nav-stacked">
 				<?php
 					foreach ($cat->parents() as $c)
 					{
@@ -85,7 +85,7 @@ $cat = new Category();
 			</ul>
 			<hr>
 			<h4><?= Yii::t("app","Archive")?></h4>
-			<ul>
+			<ul class="nav nav-pills">
 				<?php
 					foreach ($model->getArchived() as $m)
 					{

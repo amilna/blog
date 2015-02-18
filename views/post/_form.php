@@ -93,7 +93,8 @@ foreach ($model->blogCatPos as $c)
 		<div class="col-md-3">
 			<div class="well">
 				<?= $form->field($model, 'time')->widget(DateTimePicker::classname(), [				
-						'options' => ['placeholder' => 'Select posting time ...'],
+						'options' => ['placeholder' => 'Select posting time ...','readonly'=>true],
+						'removeButton'=>false,
 						'convertFormat' => true,
 						'pluginOptions' => [
 							'format' => 'yyyy-MM-dd HH:i:s',

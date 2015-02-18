@@ -73,7 +73,8 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 		
 		<div class="col-md-6 well">
 			<?= $form->field($model, 'time')->widget(DateTimePicker::classname(), [				
-					'options' => ['placeholder' => 'Select media time ...'],
+					'options' => ['placeholder' => 'Select media time ...','readonly'=>true],
+					'removeButton'=>false,
 					'convertFormat' => true,
 					'pluginOptions' => [
 						'format' => 'yyyy-MM-dd HH:i:s',
