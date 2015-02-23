@@ -14,6 +14,8 @@ use amilna\yap\SequenceJs;
 $this->title = Yii::t('app', 'Banners');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Blog'), 'url' => ['/blog/default']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$module = Yii::$app->getModule('blog');
 ?>
 <div class="banner-index">
 
@@ -129,13 +131,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'kartik\grid\SerialColumn'],
 
             [
-				'attribute' => 'search',
+				'attribute' => 'term',
 				'format'=>'html',
-				'value' => function($data){
-					$html = Html::img(str_replace("/upload/","/upload/.thumbs/",$data->image),['class'=>'pull-left','style'=>'margin:0 10px 10px 0']);
+				'value' => function($data) use ($module) {
+					$html = Html::img(str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$data->image),['class'=>'pull-left','style'=>'margin:0 10px 10px 0']);
 					if (!empty($data->front_image))
 					{
-						$html .= Html::img(str_replace("/upload/","/upload/.thumbs/",$data->front_image),['class'=>'pull-left','style'=>'margin:0 10px 10px 0']);
+						$html .= Html::img(str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$data->front_image),['class'=>'pull-left','style'=>'margin:0 10px 10px 0']);
 					}
 					return $html;
 				},

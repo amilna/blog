@@ -58,7 +58,7 @@ class BannerController extends Controller
 						{
 							$k = explode(":",$a);						
 							$v = (count($k) > 1?$k[1]:$k[0]);
-							$obj[$k[0]] = ($v == "Obj"?json_encode($d->attributes):(isset($d[$v])?$d[$v]:null));
+							$obj[$k[0]] = ($v == "Obj"?json_encode($d->attributes):(isset($d->$v)?$d->$v:null));
 						}
 					}
 				}
@@ -127,15 +127,26 @@ class BannerController extends Controller
         $model = new Banner();
         $model->time = date("Y-m-d H:i:s");
         $model->position = $model->getLast();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			$model->updatePosition($model->position);
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+		
+		$transaction = Yii::$app->db->beginTransaction();
+		try {				
+			if ($model->load(Yii::$app->request->post()) && $model->save()) {
+				$model->updatePosition($model->position);
+				$transaction->commit();
+				return $this->redirect(['view', 'id' => $model->id]);
+			}					
+			else
+			{
+				$transaction->rollBack();	
+			}
+		} catch (Exception $e) {
+			$transaction->rollBack();
+		}
+		
+		return $this->render('create', [
+			'model' => $model,
+		]);
+	
     }
 
     /**
@@ -147,15 +158,26 @@ class BannerController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			$model->updatePosition($model->position);
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
+		
+		$transaction = Yii::$app->db->beginTransaction();
+		try {				
+			if ($model->load(Yii::$app->request->post()) && $model->save()) {
+				$model->updatePosition($model->position);
+				$transaction->commit();
+				return $this->redirect(['view', 'id' => $model->id]);
+			}					
+			else
+			{
+				$transaction->rollBack();	
+			}
+		} catch (Exception $e) {
+			$transaction->rollBack();
+		}
+		        
+		return $this->render('update', [
+			'model' => $model,
+		]);
+	
     }
 
     /**

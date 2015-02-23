@@ -73,14 +73,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
             //'id',
             [
-				'attribute' => 'search',
+				'attribute' => 'term',
 				'value' => 'title',
             ],            
             'description',
             //'content:ntext',
             'tags',
             [
-				'attribute' => 'author',
+				'attribute' => 'authorName',
 				'value' => 'author.username',
             ],            
             [				

@@ -20,9 +20,9 @@ $module = Yii::$app->getModule('blog');
     <div class="pull-right col-md-3 col-xs-6">
 		<form action="index" method="get">
 			<div class="input-group">
-				<input class="form-control input-md" name="GallerySearch[search]" id="appendedInputButtons" type="text">
+				<input class="form-control input-md" name="GallerySearch[term]" id="appendedInputButtons" type="text">
 				<span class="input-group-btn">
-					<button class="btn btn-md" type="button">Search</button>
+					<button class="btn btn-md" type="submit">Search</button>
 				</span>
 			</div>
 		</form>
@@ -42,7 +42,7 @@ $module = Yii::$app->getModule('blog');
 									<a href="'.$model->url.'" class="colorbox" title="'.$model->title.'"><img src="'.str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$model->url).'" alt="'.$model->title.'"></a>
 									<!--<div class="caption">
 										<h4>'.Html::a($model->title,["//blog/gallery/view?id=".$model->id]).'</h4>
-										<p>'.$model->description.'</p>
+										<p>'.Html::encode($model->description).'</p>
 									</div>-->
 								</div>';
 										

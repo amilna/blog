@@ -78,7 +78,7 @@ $module = Yii::$app->getModule('blog');
 				'attribute' => 'title',
 				'format'=>'html',
 				'value' => function($data) use ($module) {
-					return Html::img(str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$data->url),['class'=>'pull-left','style'=>'margin:0 10px 10px 0'])." ".$data->title;
+					return Html::img(str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$data->url),['class'=>'pull-left','style'=>'margin:0 10px 10px 0'])." ".Html::encode($data->title);
 				},
             ],            
             //'title',

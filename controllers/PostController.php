@@ -57,7 +57,7 @@ class PostController extends Controller
 						{
 							$k = explode(":",$a);						
 							$v = (count($k) > 1?$k[1]:$k[0]);
-							$obj[$k[0]] = ($v == "Obj"?json_encode($d->attributes):(isset($d[$v])?$d[$v]:null));
+							$obj[$k[0]] = ($v == "Obj"?json_encode($d->attributes):(isset($d->$v)?$d->$v:null));
 						}
 					}
 				}
@@ -110,7 +110,7 @@ class PostController extends Controller
 						{
 							$k = explode(":",$a);						
 							$v = (count($k) > 1?$k[1]:$k[0]);
-							$obj[$k[0]] = ($v == "Obj"?json_encode($d->attributes):(isset($d[$v])?$d[$v]:null));
+							$obj[$k[0]] = ($v == "Obj"?json_encode($d->attributes):(isset($d->$v)?$d->$v:null));
 						}
 					}
 				}

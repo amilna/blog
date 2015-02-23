@@ -23,7 +23,7 @@ $cat = new Category();
 		<div class="col-sm-8">
 			<div>
 				<div>
-					<h3><?= $model->author->username ?> <small><i class="glyphicon glyphicon-time"></i>  <?= date('D d M, Y',strtotime($model->time)) ?> </small></h3>
+					<h3><?= Html::encode($model->author->username) ?> <small><i class="glyphicon glyphicon-time"></i>  <?= date('D d M, Y',strtotime($model->time)) ?> </small></h3>
 				</div>				
 				<div>
 					<?php
@@ -57,7 +57,7 @@ $cat = new Category();
 			
 			<form action="<?=Yii::$app->urlManager->createUrl("//blog/post")?>" method="get">
 				<div class="input-group">
-					<input class="form-control input-md" name="PostSearch[search]" id="appendedInputButtons" type="text">
+					<input class="form-control input-md" name="PostSearch[term]" id="appendedInputButtons" type="text">
 					<span class="input-group-btn">
 						<button class="btn btn-md" type="submit">Search</button>
 					</span>

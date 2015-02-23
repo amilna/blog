@@ -45,14 +45,7 @@ class BlogCatPos extends \yii\db\ActiveRecord
             'post_id' => Yii::t('app', 'Post ID'),
             'isdel' => Yii::t('app', 'Isdel'),
         ];
-    }
-	
-	/* uncomment to undisplay deleted records (assumed the table has column isdel)
-	public static function find()
-	{
-		return parent::find()->where(['{{%blog_cat_pos}}.isdel' => 0]);
-	}
-	*/
+    }	
     
 	public function itemAlias($list,$item = false,$bykey = false)
 	{

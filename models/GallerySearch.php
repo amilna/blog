@@ -14,7 +14,7 @@ class GallerySearch extends Gallery
 {
 
 	public $tag;
-	public $search;
+	public $term;
 
     /**
      * @inheritdoc
@@ -23,10 +23,22 @@ class GallerySearch extends Gallery
     {
         return [
             [['id', 'type', 'isdel'], 'integer'],
-            [['title', 'description', 'url', 'tags', 'tag', 'time', 'search'], 'safe'],
+            [['title', 'description', 'url', 'tags', 'tag', 'time', 'term'], 'safe'],
             [['status'], 'boolean'],
         ];
     }
+	
+	public function attributeLabels()
+    {
+        return [
+            'term' => Yii::t('app', 'Search'),                 
+        ];
+    }
+	
+	public static function find()
+	{
+		return parent::find()->where([Gallery::tableName().'.isdel' => 0]);
+	}
 
     /**
      * @inheritdoc
@@ -61,20 +73,29 @@ class GallerySearch extends Gallery
 			$tab = isset($afield[1])?$afield[1]:false;			
 			if (!empty($this->$field))
 			{				
-				$number = explode(" ",$this->$field);			
+				$number = explode(" ",trim($this->$field));							
 				if (count($number) == 2)
 				{									
-					array_push($params,[$number[0], ($tab?$tab.".":"").$field, $number[1]]);	
+					if (in_array($number[0],['>','>=','<','<=']) && is_numeric($number[1]))
+					{
+						array_push($params,[$number[0], ($tab?$tab.".":"").$field, $number[1]]);	
+					}
 				}
-				elseif (count($number) > 2)
+				elseif (count($number) == 3)
 				{															
-					array_push($params,[">=", ($tab?$tab.".":"").$field, $number[0]]);
-					array_push($params,["<=", ($tab?$tab.".":"").$field, $number[0]]);
+					if (is_numeric($number[0]) && is_numeric($number[2]))
+					{
+						array_push($params,['>=', ($tab?$tab.".":"").$field, $number[0]]);		
+						array_push($params,['<=', ($tab?$tab.".":"").$field, $number[2]]);		
+					}
 				}
-				else
+				elseif (count($number) == 1)
 				{					
-					array_push($params,["=", ($tab?$tab.".":"").$field, str_replace(["<",">","="],"",$number[0])]);
-				}									
+					if (is_numeric($number[0]))
+					{
+						array_push($params,['=', ($tab?$tab.".":"").$field, str_replace(["<",">","="],"",$number[0])]);		
+					}	
+				}								
 			}
 		}	
 		return $params;
@@ -120,7 +141,7 @@ class GallerySearch extends Gallery
      */
     public function search($params)
     {
-        $query = Gallery::find();
+        $query = $this->find();
         
                 
         $query->joinWith([/**/]);
@@ -129,7 +150,10 @@ class GallerySearch extends Gallery
             'query' => $query,
         ]);
         
-        /* uncomment to sort by relations table on respective column */
+        $dataProvider->sort->attributes['term'] = [			
+			'asc' => ['title' => SORT_ASC],
+			'desc' => ['title' => SORT_DESC],
+		];
 
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
@@ -156,18 +180,20 @@ class GallerySearch extends Gallery
 			$query->andFilterWhere($p);
 		}		
 		
-		if ($this->search)
-		{
-			$query->andFilterWhere(["OR","lower(title) like '%".strtolower($this->search)."%'",
-				["OR","lower(description) like '%".strtolower($this->search)."%'",
-					["OR","lower(tags) like '%".strtolower($this->search)."%'",
-						"lower(url) like '%".strtolower($this->search)."%'"
+		if ($this->term)
+		{			
+			$query->andFilterWhere(["OR","lower(title) like '%".strtolower($this->term)."%'",
+				["OR","lower(description) like '%".strtolower($this->term)."%'",
+					["OR","lower(tags) like '%".strtolower($this->term)."%'",
+						"lower(url) like '%".strtolower($this->term)."%'"
 					]
 				]
-			]);	
+			]);							
 		}
 		
-		$query->andFilterWhere(['like',"lower(concat(',',tags,','))",strtolower(",".$this->tag.",")]);				
+		if ($this->tag) {
+			$query->andFilterWhere(['like',"lower(concat(',',tags,','))",strtolower(",".$this->tag.",")]);				
+		}
 		
 		
         return $dataProvider;

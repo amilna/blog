@@ -68,13 +68,7 @@ class Post extends \yii\db\ActiveRecord
             'time' => Yii::t('app', 'Time'),
             'isdel' => Yii::t('app', 'Isdel'),
         ];
-    }
-	
-	/* uncomment to undisplay deleted records (assumed the table has column isdel) */
-	public static function find()
-	{
-		return parent::find()->where(['{{%blog_post}}.isdel' => 0]);
-	}			
+    }		
     
 	public function itemAlias($list,$item = false,$bykey = false)
 	{

@@ -117,7 +117,7 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 							'multiple' => false,
 							'kcfOptions'=>$kcfOptions,	
 							'kcfBrowseOptions'=>[
-								'type'=>'image'				
+								'type'=>'images'				
 							]	
 						]);	
 					?>							
