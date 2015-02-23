@@ -173,8 +173,12 @@ class PostController extends Controller
 
         if (Yii::$app->request->post())        
         {
-			$post = Yii::$app->request->post();						
-			$category = $post['Post']['category'];
+			$post = Yii::$app->request->post();									
+			$category = [];						
+			if (isset($post['Post']['category']))
+			{
+				$category = $post['Post']['category'];
+			}			
 			$model->load($post);
 			if ($model->save()) {
 				
@@ -217,7 +221,11 @@ class PostController extends Controller
 		if (Yii::$app->request->post())        
         {
 			$post = Yii::$app->request->post();						
-			$category = $post['Post']['category'];
+			$category = [];						
+			if (isset($post['Post']['category']))
+			{
+				$category = $post['Post']['category'];
+			}			
 			$model->load($post);
 						
 			if ($model->save()) {
