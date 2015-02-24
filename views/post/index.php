@@ -42,3 +42,4 @@ $dataProvider->pagination = [
 	]) ?>	
 
 </div>
+

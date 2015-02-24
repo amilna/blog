@@ -34,7 +34,9 @@ class CategoryController extends Controller
     public function actionIndex($format= false,$arraymap= false,$term = false)
     {
         $searchModel = new CategorySearch();        
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams+($term?['CategorySearch'=>['search'=>$term]]:[]));
+        $req = Yii::$app->request->queryParams;
+        if ($term) { $req[basename(str_replace("\\","/",get_class($searchModel)))]["term"] = $term;}        
+        $dataProvider = $searchModel->search($req);				
 
         if ($format == 'json')
         {
