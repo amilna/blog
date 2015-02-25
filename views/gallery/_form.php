@@ -157,12 +157,23 @@ $("#gallery-type").change(function() {
 $('#videos .kcf-thumbs').bind("DOMSubtreeModified",function(){	
 	var sel = $('#videos .kcf-thumbs input[name=videos_url]');
 	var url = "";
-	if (sel.length > 0)
+	if (sel.length > 0 && $('#videos .kcf-thumbs').html().replace(/ /g,"") != "")
 	{
 		url = sel.val();
-	}
+	}	
 	$('#gallery-url').val(url);
 });
+
+
+var video = "<?= $model->url?>";
+var thumb = "<?= Yii::$app->assetManager->getPublishedUrl((new \iutbay\yii2kcfinder\KCFinderAsset)->sourcePath) ?>/themes/default/img/files/big/<?= substr($model->url,-3)?>.png";
+if (video != "")
+{
+	var html = '<li class="sortable ui-sortable-handle"><div class="remove"><span class="fa fa-trash"></span></div><img src="'+thumb+'"><input type="hidden" name="videos_url" value="'+video+'"></li>';	
+	$("#videos .kcf-thumbs").html(html);
+	$('#gallery-url').val(video);		
+}
+
 	
 <?php $this->endBlock(); ?>
 
