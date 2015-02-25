@@ -35,6 +35,7 @@ $kcfOptions = array_merge([], [
     'types'=>[
 		'files'    =>  "",        
         'images'   =>  "*img",
+        'videos'   =>  "ogg flv mp4",
     ]      
 ]);
 
@@ -65,7 +66,7 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 				</div>						
 			</div>
 
-			<?= $form->field($model, 'description')->textArea(['maxlength' => 155,'placeholder'=>Yii::t('app','This description also used as meta description')]) ?>			
+			<?= $form->field($model, 'description')->textArea(['rows'=>4,'maxlength' => 155,'placeholder'=>Yii::t('app','This description also used as meta description')]) ?>			
 			
 			<?= $form->field($model, 'tags')->widget(Select2::classname(), [
 				'options' => [
@@ -77,7 +78,8 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 			]) ?>					
 		</div>	
 		
-		<div class="col-md-6 well">
+		<div class="col-md-6">
+			<div class="well">
 			<?= $form->field($model, 'time')->widget(DateTimePicker::classname(), [				
 					'options' => ['placeholder' => 'Select media time ...','readonly'=>true],
 					'removeButton'=>false,
@@ -90,17 +92,49 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 				]) 
 			?>
 			
-			<?php 
-				echo $form->field($model, 'url')->widget(KCFinderInputWidget::className(), [
-					'multiple' => false,
-					'kcfOptions'=>$kcfOptions,	
-					'kcfBrowseOptions'=>[
-						'type'=>'images'				
-					]	
-				]);	
-			?>							
+			<?php
+			
+				$field = $form->field($model,"type");				
+				echo $field->widget(Select2::classname(),[								
+					'data' => $model->itemAlias("type"),								
+					'options' => [
+						'placeholder' => Yii::t('app','Select type ...'), 
+						'multiple' => false
+					],
+				]);
+			?>
+			
+			<div class="row">
+				<div class="col-md-12">
+				<?php 
+					echo $form->field($model, 'image')->widget(KCFinderInputWidget::className(), [
+						'multiple' => false,
+						'kcfOptions'=>$kcfOptions,	
+						'kcfBrowseOptions'=>[
+							'type'=>'images'				
+						]	
+					]);	
+				?>							
+				</div>
+				<div id="videos" class="col-md-12" style="<?= $model->type == 0?"display:none;":""?>">
+					<div class="well">
+				<?php 	
+					echo $form->field($model, 'url')->textInput(['placeholder'=>Yii::t('app','Url of youtube or uploaded movie')]);
+					echo KCFinderInputWidget::widget([
+						'name'=>'videos_url',
+						'multiple' => false,
+						'kcfOptions'=>$kcfOptions,	
+						'kcfBrowseOptions'=>[
+							'type'=>'videos'				
+						],					
+					]);	
+				?>
+					</div>					
+				</div>
+			</div>
 			
 			<?/*= $form->field($model, 'type')->textInput() */?>
+			</div>	
 		</div>	
     </div>	
 
@@ -111,3 +145,28 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<script type="text/javascript">
+	
+<?php $this->beginBlock('VIDEOS') ?>			
+
+$("#gallery-type").change(function() {	
+	$("#videos").css("display",($(this).val() == 1?"":"none"));	
+});
+
+$('#videos .kcf-thumbs').bind("DOMSubtreeModified",function(){	
+	var sel = $('#videos .kcf-thumbs input[name=videos_url]');
+	var url = "";
+	if (sel.length > 0)
+	{
+		url = sel.val();
+	}
+	$('#gallery-url').val(url);
+});
+	
+<?php $this->endBlock(); ?>
+
+</script>
+<?php
+yii\web\YiiAsset::register($this);
+$this->registerJs($this->blocks['VIDEOS'], yii\web\View::POS_END);

@@ -9,6 +9,11 @@ use yii\widgets\DetailView;
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Galleries'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+if ($model->type == 1)
+{
+	\amilna\blog\assets\FlowAsset::register($this);	
+}
 ?>
 <div class="gallery-view">
 
@@ -27,7 +32,18 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	<div class="row">
 		<div class="col-xs-8">
-			<?= Html::img($model->url,["style"=>"max-width:100%"])?>
+			<?php 
+				if ($model->type == 1) 
+				{
+					$gdd = Yii::$app->assetManager->getPublishedUrl((new \amilna\blog\assets\FlowAsset)->sourcePath);
+					$url = (substr($model->url,0,4) == "http"?$model->url:$gdd."?url=".$model->url."&image=".$model->image."&auto=false");
+					echo "<iframe align=middle frameborder=0 seamless=true width=100% height=390 style='max-height:390px:' src='".$url."'></iframe>";
+				}
+				else
+				{
+					echo Html::img($model->image,["style"=>"max-width:100%"]);
+				}			
+			?>			
 		</div>
 		<div class="col-xs-4">
 			<?= DetailView::widget([
@@ -35,12 +51,14 @@ $this->params['breadcrumbs'][] = $this->title;
 				'attributes' => [
 					//'id',
 					'title',
-					'description',
-					//'url:ntext',
+					'description',					
 					'tags',
 					'status:boolean',
 					'time',
-					//'type',					
+					[
+						'attribute'=>'type',
+						'value'=>$model->itemAlias('type',$model->type),
+					],					
 					//'isdel',
 				],
 			]) ?>

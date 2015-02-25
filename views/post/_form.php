@@ -60,10 +60,10 @@ foreach ($model->blogCatPos as $c)
 	<div class="row">
 		<div class="col-md-9">
 			<div class="row">				
-				<div class="col-xs-10">
+				<div class="col-xs-7 col-sm-9">
 			<?= $form->field($model, 'title')->textInput(['maxlength' => 65,'placeholder'=>Yii::t('app','Title contain a seo keyword if possible')]) ?>
 				</div>
-				<div class="col-xs-2">
+				<div class="col-xs-5 col-sm-3">
 			<?= $form->field($model, 'isfeatured')->widget(SwitchInput::classname(), [			
 					'type' => SwitchInput::CHECKBOX,				
 				]);

@@ -4,16 +4,28 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ListView;
 use himiklab\colorbox\Colorbox;
+use yii\data\ArrayDataProvider;
 
 /* @var $this yii\web\View */
 /* @var $searchModel amilna\blog\models\GallerySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+\amilna\blog\assets\FlowAsset::register($this);
+
+$req = Yii::$app->request->queryParams;
+
 $this->title = Yii::t('app', 'Galleries');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Blog'), 'url' => ['/blog/default']];
+if (isset($req["GallerySearch"]["tag"]))
+{
+	$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Galleries'), 'url' => ['/blog/gallery']];
+	$this->title = ucwords($req["GallerySearch"]["tag"]);
+}
 $this->params['breadcrumbs'][] = $this->title;
 
+$this->params['cboxTarget'] = [];
 $module = Yii::$app->getModule('blog');
+
 ?>
 <div class="gallery-index">    
     
@@ -31,15 +43,20 @@ $module = Yii::$app->getModule('blog');
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>    
 		
 	<?= ListView::widget([
-		'dataProvider' => $dataProvider,
+		'dataProvider' => new ArrayDataProvider([
+			'allModels' => $albums,			
+			'pagination' => [
+				'pageSize' => 12,
+			],
+		]),
 		'itemOptions' => ['class' => 'pull-left','tag'=>'ul'],
-		//'summary'=>Yii::t('app','List of account codes where increase on receipt or revenues'),		
-		//'itemView'=>(isset($_GET['GallerySearch[album]'])?'_itemTag':'_itemAll'),	
+		//'summary'=>Yii::t('app','List of account codes where increase on receipt or revenues'),				
 		'options' => ['class' => 'row text-center'],		
 		'layout'=>"{items}{pager}",
-		'itemView' => function ($model, $key, $index, $widget) use ($module) {					
+		'itemView'=>(isset($req["GallerySearch"]["tag"])?'_itemTag':'_itemAll'),	
+		/*'itemView' => function ($model, $key, $index, $widget) use ($module) {					
 						$html = '<div class="thumbnail">
-									<a href="'.$model->url.'" class="colorbox" title="'.$model->title.'"><img src="'.str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$model->url).'" alt="'.$model->title.'"></a>
+									<a href="'.$model->image.'" class="colorbox" title="'.$model->title.'"><img src="'.str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$model->image).'" alt="'.$model->title.'"></a>
 									<!--<div class="caption">
 										<h4>'.Html::a($model->title,["//blog/gallery/view?id=".$model->id]).'</h4>
 										<p>'.Html::encode($model->description).'</p>
@@ -48,7 +65,7 @@ $module = Yii::$app->getModule('blog');
 										
 						return $html;
 					},
-				
+		*/		
 		//'itemsTagName'=>'ul',
 		//'template'=>"{items}{pager}",
 		//'itemsCssClass'=>'ace-thumbnails clearfix',	
@@ -57,13 +74,6 @@ $module = Yii::$app->getModule('blog');
 </div>
 
 <?= Colorbox::widget([
-    'targets' => [
-        '.colorbox' => [
-            'maxWidth' => 800,
-            'maxHeight' => 600,
-            'rel'=>'colorbox',
-            'slideshow'=>true
-        ],
-    ],
+    'targets' => $this->params['cboxTarget'],        
     'coreStyle' => 1
 ]) ?>

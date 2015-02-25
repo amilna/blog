@@ -3,33 +3,101 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
+
 /* @var $this yii\web\View */
-/* @var $model amilna\cap\models\AccountCode */
+/* @var $model amilna\blog\models\Gallery */
+
+$module = Yii::$app->getModule('blog');
+
+$this->params['cboxTarget']['.gallery_colorbox'] =  [
+													'maxWidth' => 800,
+													'maxHeight' => 600,
+													'rel'=>'gallery_colorbox',
+													'slideshow'=>true
+												];
+
+$this->params['cboxTarget']['.hgallery_colorbox'] =  [
+													'maxWidth' => 800,
+													'maxHeight' => 600,
+													'rel'=>'hgallery_colorbox',
+													'slideshow'=>true
+												];
+												
+$gdd = Yii::$app->assetManager->getPublishedUrl((new \amilna\blog\assets\FlowAsset)->sourcePath);
+												
+if ($model["type"] == 1 )
+{
+	$this->params['cboxTarget']['.gallery_colorbox'.$model["id"]] =  [
+													'innerWidth' => 640,
+													'innerHeight' => 390,
+													//'rel'=>'gallery_colorbox'.$model["id"],
+													//'slideshow'=>false,
+													'iframe' => true
+												];
+
+	$this->params['cboxTarget']['.hgallery_colorbox'.$model["id"]] =  [
+													'innerWidth' => 640,
+													'innerHeight' => 390,
+													//'rel'=>'hgallery_colorbox'.$model["id"],
+													//'slideshow'=>false,
+													'iframe' => true
+												];
+													
+}
+
 
 ?>
 
-   <li>
-		<div>
-			<img alt="150x150" src="<?= str_replace('/uploads/','/uploads/.thumbs/',$model->url) ?>">			
-			<div class="text">
-				<div class="inner">
-					<span><h4><?= $model->description ?></h4></span>
-
-					<br>
+	<div class="thumbnail">
+		<div class="row">
+			<?php
+				if (count($model['data']) == 1)
+				{
+					$class = 'gallery_colorbox'.($model["type"] == 1?$model["id"]:"");
+					$imgclass = "col-xs-12";
 					
-					<div>
-						<a href="#" title="<?= Yii::t("app","Media type of ".$model::itemAlias('type',$model->type)) ?>">
-							<i class="glyphicon glyphicon-<?= ($model->type == 0?'picture':'film') ?>"></i>
-						</a>
-						
-						<a href="<?= $model->url ?>" data-rel="colorbox" class="cboxElement">
-							<i class="glyphicon glyphicon-search-plus"></i>
-						</a>
-															
-					</div> 
-				</div>
-			</div>
+					
+					if ($model["type"] == 1)
+					{
+						$model["url"] = (substr($model["url"],0,4) == "http"?$model["url"]:$gdd."?url=".$model["url"]."&image=".$model['data'][0]."&auto=true");
+					}
+					
+					$url = ($model["type"] == 1?$model["url"]:$model['data'][0]);
+					$durl = $url;
+				}
+				else
+				{
+					$class = "";
+					$imgclass = "col-xs-6";
+					$durl= ["//blog/gallery/index","GallerySearch[tag]"=>strtolower($model['title'])];
+					$url = Yii::$app->urlManager->createUrl($durl);
+				}
+			?>
+			<a href="<?= $url ?>" class="<?= $class ?>" title="<?= $model['title'] ?>">
+		<?php							
+			if ($model["type"] == 1)
+			{
+				//echo "<iframe align=middle frameborder=0 seamless=true width=100% height=100% class='".$imgclass."' style='max-height:100px:' src='".str_replace("&auto=true","&auto=false",$url)."'></iframe>";					
+				echo Html::img(str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$model['data'][0]),['class'=>$imgclass]);				
+			}
+			else
+			{
+				$n = 0;						
+				foreach ($model['data'] as $data)
+				{
+					$n += 1;
+					echo Html::img(str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$data),['class'=>$imgclass]);				
+				}
+			}	
+		?>	
+			</a>		
+		</div>			
+										
+		<div class="caption">
+			<h4><?= $model["type"] == 1?'<i class="fa fa-film"></i>':''?> <?= Html::a($model['title'],$durl,["class"=>'h'.$class]) ?></h4>
+			<h5><?= $model['description'].(!empty($model['description'])?"<br>":"") ?>
+			<small><?= $model['tags'] ?></small>
+			</h5>
 		</div>
-	</li>
-
+	</div>
 

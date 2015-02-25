@@ -80,62 +80,64 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 			]) ?>					
 		</div>	
 		
-		<div class="col-md-6 well">
-			<div class="row">
-				<div class="col-sm-6 ">
-					<?= $form->field($model, 'time')->widget(DateTimePicker::classname(), [				
-							'options' => ['placeholder' => 'Select media time ...','readonly'=>true],
-							'removeButton'=>false,
-							'convertFormat' => true,
-							'pluginOptions' => [
-								'format' => 'yyyy-MM-dd HH:i:s',
-								//'startDate' => '01-Mar-2014 12:00 AM',
-								'todayHighlight' => true
-							]
-						]) 
-					?>
-				</div>
-				<div class="col-sm-6 ">
-					<?= $form->field($model, 'position')->widget(TouchSpin::classname(), [
-							//'sliderColor'=>Slider::TYPE_GREY,
-							//'handleColor'=>Slider::TYPE_PRIMARY,
-							'pluginOptions'=>[
-								'min'=>0,
-								'max'=>20,
-								'step'=>1,
-								'handle'=>'triangle',
-								'tooltip'=>'always'
-							]
-						])
-					?>
+		<div class="col-md-6">
+			<div class="well">
+				<div class="row">
+					<div class="col-sm-6 ">
+						<?= $form->field($model, 'time')->widget(DateTimePicker::classname(), [				
+								'options' => ['placeholder' => 'Select media time ...','readonly'=>true],
+								'removeButton'=>false,
+								'convertFormat' => true,
+								'pluginOptions' => [
+									'format' => 'yyyy-MM-dd HH:i:s',
+									//'startDate' => '01-Mar-2014 12:00 AM',
+									'todayHighlight' => true
+								]
+							]) 
+						?>
+					</div>
+					<div class="col-sm-6 ">
+						<?= $form->field($model, 'position')->widget(TouchSpin::classname(), [
+								//'sliderColor'=>Slider::TYPE_GREY,
+								//'handleColor'=>Slider::TYPE_PRIMARY,
+								'pluginOptions'=>[
+									'min'=>0,
+									'max'=>20,
+									'step'=>1,
+									'handle'=>'triangle',
+									'tooltip'=>'always'
+								]
+							])
+						?>
+					</div>	
+				</div>		
+				<div class="row">
+					<div class="col-sm-6 ">
+						<?php 
+							echo $form->field($model, 'image')->widget(KCFinderInputWidget::className(), [
+								'multiple' => false,
+								'kcfOptions'=>$kcfOptions,	
+								'kcfBrowseOptions'=>[
+									'type'=>'images'				
+								]	
+							]);	
+						?>							
+					</div>
+					<div class="col-sm-6 ">	
+						<?php 
+							echo $form->field($model, 'front_image')->widget(KCFinderInputWidget::className(), [
+								'multiple' => false,
+								'kcfOptions'=>$kcfOptions,	
+								'kcfBrowseOptions'=>[
+									'type'=>'images'				
+								]	
+							]);	
+						?>	
+					</div>
 				</div>	
-			</div>		
-			<div class="row">
-				<div class="col-sm-6 ">
-					<?php 
-						echo $form->field($model, 'image')->widget(KCFinderInputWidget::className(), [
-							'multiple' => false,
-							'kcfOptions'=>$kcfOptions,	
-							'kcfBrowseOptions'=>[
-								'type'=>'images'				
-							]	
-						]);	
-					?>							
-				</div>
-				<div class="col-sm-6 ">	
-					<?php 
-						echo $form->field($model, 'front_image')->widget(KCFinderInputWidget::className(), [
-							'multiple' => false,
-							'kcfOptions'=>$kcfOptions,	
-							'kcfBrowseOptions'=>[
-								'type'=>'images'				
-							]	
-						]);	
-					?>	
-				</div>
-			</div>	
-		
-			<?/*= $form->field($model, 'type')->textInput() */?>
+			
+				<?/*= $form->field($model, 'type')->textInput() */?>
+			</div>
 		</div>	
     </div>		    
 

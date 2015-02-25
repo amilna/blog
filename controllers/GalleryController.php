@@ -35,7 +35,10 @@ class GalleryController extends Controller
     {
         $searchModel = new GallerySearch();        
         $req = Yii::$app->request->queryParams;
-        if ($term) { $req[basename(str_replace("\\","/",get_class($searchModel)))]["term"] = $term;}        
+        if ($term) { 
+			$req[basename(str_replace("\\","/",get_class($searchModel)))]["term"] = $term;			
+        }        
+        $req[basename(str_replace("\\","/",get_class($searchModel)))]["status"] = 1;
         $dataProvider = $searchModel->search($req);				
 
         if ($format == 'json')
@@ -78,10 +81,51 @@ class GalleryController extends Controller
 			return \yii\helpers\Json::encode($model);	
 		}
 		else
-		{
+		{					
+			
+		
+			$tags=[];
+			$items=[];
+			$n = 0;
+			$model = [];
+			foreach ($dataProvider->getModels() as $data)
+			{
+				if (!empty($data->tags) && (!isset($req['GallerySearch']['tag'])))
+				{					
+					foreach(explode(",",$data->tags) as $tag)
+					{
+						if (!isset($tags[strtolower($tag)]))
+						{
+							$n += 1;
+							$tags[strtolower($tag)]=array('id'=>$n,'data'=>array(),'url'=>$data->url,'type'=>0,'tags'=>$tag,'title'=>ucwords($tag),'description'=>$data->description);
+							array_push($tags[strtolower($tag)]['data'],$data->image);
+						}
+						else
+						{
+							if (count($tags[strtolower($tag)]['data']) < 4)
+							{
+								array_push($tags[strtolower($tag)]['data'],$data->image);
+							}
+						}
+					}
+				}
+				else
+				{
+					if (!isset($items[$data->id]))
+					{
+						$n += 1;
+						$items[$data->id]=array('id'=>$n,'data'=>array(0=>$data->image),'url'=>$data->url,'type'=>$data->type,'tags'=>$data->tags,'title'=>$data->title,'description'=>$data->description);
+					}							
+				}
+				
+			}
+			$albums = array_merge($tags,$items);
+		
+		
 			return $this->render('index', [
 				'searchModel' => $searchModel,
 				'dataProvider' => $dataProvider,
+				'albums' => $albums,
 			]);
 		}	
     }

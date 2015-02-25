@@ -63,7 +63,7 @@ class Post extends \yii\db\ActiveRecord
             'tags' => Yii::t('app', 'Tags'),
             'image' => Yii::t('app', 'Image'),
             'author_id' => Yii::t('app', 'Author ID'),
-            'isfeatured' => Yii::t('app', 'Is Featured?'),
+            'isfeatured' => Yii::t('app', 'Featured'),
             'status' => Yii::t('app', 'Status'),
             'time' => Yii::t('app', 'Time'),
             'isdel' => Yii::t('app', 'Isdel'),

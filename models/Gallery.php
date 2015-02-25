@@ -33,7 +33,7 @@ class Gallery extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description', 'url', 'type'], 'required'],
+            [['title', 'description', 'image', 'type'], 'required'],
             [['url'], 'string'],
             [['status'], 'boolean'],
             [['type', 'isdel'], 'integer'],
@@ -53,6 +53,7 @@ class Gallery extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'title' => Yii::t('app', 'Title'),
             'description' => Yii::t('app', 'Description'),
+            'image' => Yii::t('app', 'Image'),
             'url' => Yii::t('app', 'Url'),
             'tags' => Yii::t('app', 'Tags'),
             'status' => Yii::t('app', 'Enable'),

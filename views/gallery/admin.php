@@ -78,12 +78,28 @@ $module = Yii::$app->getModule('blog');
 				'attribute' => 'title',
 				'format'=>'html',
 				'value' => function($data) use ($module) {
-					return Html::img(str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$data->url),['class'=>'pull-left','style'=>'margin:0 10px 10px 0'])." ".Html::encode($data->title);
+					return Html::img(str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$data->image),['class'=>'pull-left','style'=>'margin:0 10px 10px 0'])." ".Html::encode($data->title);
 				},
             ],            
             //'title',
             'description',            
             'tags',
+            [
+				'attribute'=>'type',
+				'value' => function($data){					
+					return $data->itemAlias('type',$data->type);
+				},				
+				'filterType'=>GridView::FILTER_SELECT2,				
+				'filterWidgetOptions'=>[
+					'data'=>$searchModel->itemAlias('type'),
+					'options' => ['placeholder' => Yii::t('app','Select a status type...')],
+					'pluginOptions' => [
+						'allowClear' => true
+					],
+					
+				],
+								
+            ],
             [
 				'attribute'=>'status',
 				'value' => function($data){					
