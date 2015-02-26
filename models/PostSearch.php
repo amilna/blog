@@ -153,14 +153,16 @@ class PostSearch extends Post
             'query' => $query,
         ]);
         
+        $userClass = Yii::$app->getModule('blog')->userClass;
+        
         /* uncomment to sort by relations table on respective column
 		$dataProvider->sort->attributes['blogcatposId'] = [			
 			'asc' => ['{{%blogcatpos}}.id' => SORT_ASC],
 			'desc' => ['{{%blogcatpos}}.id' => SORT_DESC],
 		];*/
 		$dataProvider->sort->attributes['authorName'] = [			
-			'asc' => ['{{%user}}.username' => SORT_ASC],
-			'desc' => ['{{%user}}.username' => SORT_DESC],
+			'asc' => [$userClass::tableName().'.username' => SORT_ASC],
+			'desc' => [$userClass::tableName().'.username' => SORT_DESC],
 		];
 		
 		$dataProvider->sort->attributes['term'] = [			
@@ -187,8 +189,7 @@ class PostSearch extends Post
 		{
 			$query->andFilterWhere($p);
 		}
-		
-		$userClass = Yii::$app->getModule('blog')->userClass;
+				
 		$query->andFilterWhere(['like','lower('.$userClass::tableName().'.username)',strtolower($this->authorName)]);
 		
 		if ($this->category || $this->term)
