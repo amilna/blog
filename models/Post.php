@@ -123,7 +123,7 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getBlogCatPos()
     {
-        return $this->hasMany(BlogCatPos::className(), ['post_id' => 'id']);
+        return $this->hasMany(BlogCatPos::className(), ['post_id' => 'id'])->where("isdel=0");
     }
 
     /**

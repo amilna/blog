@@ -234,7 +234,7 @@ class PostController extends Controller
 						
 			if ($model->save()) {
 				
-				$cs = BlogCatPos::deleteAll("post_id = :id",["id"=>$model->id]);				
+				$cs = BlogCatPos::deleteAll("post_id = :id",["id"=>$model->id]);							
 				
 				foreach ($category as $d)
 				{					
