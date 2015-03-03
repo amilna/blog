@@ -27,6 +27,13 @@ $this->params['cboxTarget'] = [];
 $module = Yii::$app->getModule('blog');
 
 ?>
+<style>
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+</style>
+
 <div class="gallery-index">    
     
     <div class="pull-right col-md-3 col-xs-6">

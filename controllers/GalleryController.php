@@ -97,7 +97,7 @@ class GalleryController extends Controller
 						if (!isset($tags[strtolower($tag)]))
 						{
 							$n += 1;
-							$tags[strtolower($tag)]=array('id'=>$n,'data'=>array(),'url'=>$data->url,'type'=>0,'tags'=>$tag,'title'=>ucwords($tag),'description'=>$data->description);
+							$tags[strtolower($tag)]=array('id'=>$n,'data'=>array(),'url'=>$data->url,'type'=>-1,'tags'=>$tag,'title'=>ucwords($tag),'description'=>$data->description);
 							array_push($tags[strtolower($tag)]['data'],$data->image);
 						}
 						else
@@ -215,6 +215,7 @@ class GalleryController extends Controller
         $model = new Gallery();
         $model->time = date("Y-m-d H:i:s");	
         $model->type = 0;
+        $model->isdel = 0;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

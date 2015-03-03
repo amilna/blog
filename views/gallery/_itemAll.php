@@ -49,12 +49,14 @@ if ($model["type"] == 1 )
 ?>
 
 	<div class="thumbnail">
+		<div class="col-xs-12" style="background-color:black;">
 		<div class="row">
-			<?php
-				if (count($model['data']) == 1)
+			
+			<?php				
+				if (count($model['data']) == 1 && $model["type"] > (-1) )
 				{
 					$class = 'gallery_colorbox'.($model["type"] == 1?$model["id"]:"");
-					$imgclass = "col-xs-12";
+					$imgclass = "col-xs-12 nopadding";
 					
 					
 					if ($model["type"] == 1)
@@ -68,7 +70,7 @@ if ($model["type"] == 1 )
 				else
 				{
 					$class = "";
-					$imgclass = "col-xs-6";
+					$imgclass = "nopadding col-xs-".(12/pow(2,(count($model['data'])-1)/max(1,(count($model['data'])-1))));
 					$durl= ["//blog/gallery/index","GallerySearch[tag]"=>strtolower($model['title'])];
 					$url = Yii::$app->urlManager->createUrl($durl);
 				}
@@ -91,6 +93,7 @@ if ($model["type"] == 1 )
 			}	
 		?>	
 			</a>		
+			</div>			
 		</div>			
 										
 		<div class="caption">

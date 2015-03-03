@@ -51,7 +51,7 @@ if ($model["type"] == 1 )
 	<div class="thumbnail">
 		<div class="row">
 			<?php
-				if (count($model['data']) == 1)
+				if (count($model['data']) == 1 || $model["type"] > (-1) )
 				{
 					$class = 'gallery_colorbox'.($model["type"] == 1?$model["id"]:"");
 					$imgclass = "col-xs-12";

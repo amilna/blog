@@ -174,6 +174,7 @@ class PostController extends Controller
         $model = new Post();
         $model->time = date("Y-m-d H:i:s");	
         $model->author_id = Yii::$app->user->id;
+        $model->isdel = 0;
 
         if (Yii::$app->request->post())        
         {
@@ -184,27 +185,34 @@ class PostController extends Controller
 				$category = $post['Post']['category'];
 			}			
 			$model->load($post);
-			if ($model->save()) {
+			
+			$transaction = Yii::$app->db->beginTransaction();
+			try {				
 				
-				$cs = BlogCatPos::deleteAll("post_id = :id",["id"=>$model->id]);
-				
-				foreach ($category as $d)
-				{
-					$c = BlogCatPos::find()->where("post_id = :id AND category_id = :aid",["id"=>$model->id,"aid"=>intval($d)])->one();					
-					if (!$c)
+				if ($model->save()) {
+					
+					$cs = BlogCatPos::deleteAll("post_id = :id",["id"=>$model->id]);
+					
+					foreach ($category as $d)
 					{
-						$c = new BlogCatPos();	
-					}					
-					$c->post_id = $model->id;
-					$c->category_id = $d;
-					$c->isdel = 0;					
-					$c->save();								
-				}
-								
-				return $this->redirect(['view', 'id' => $model->id]);            
-			} else {
-				$model->id = array_merge($category,[]);	
-			}
+						$c = new BlogCatPos();						
+						$c->post_id = $model->id;
+						$c->category_id = $d;
+						$c->isdel = 0;					
+						$c->save();								
+					}
+									
+					$transaction->commit();                                    				
+					return $this->redirect(['view', 'id' => $model->id]);            
+				}				
+				else
+				{
+					$model->id = array_merge($category,[]);	
+					$transaction->rollBack();					
+				}				
+			} catch (Exception $e) {
+				$transaction->rollBack();				
+			}   						
 		}	
         
         return $this->render('create', [
@@ -231,26 +239,37 @@ class PostController extends Controller
 				$category = $post['Post']['category'];
 			}			
 			$model->load($post);
+			
+			$transaction = Yii::$app->db->beginTransaction();
+			try {				
 						
-			if ($model->save()) {
-				
-				$cs = BlogCatPos::deleteAll("post_id = :id",["id"=>$model->id]);							
-				
-				foreach ($category as $d)
-				{					
-					$c = BlogCatPos::find()->where("post_id = :id AND category_id = :aid",["id"=>$model->id,"aid"=>intval($d)])->one();					
-					if (!$c)
-					{
-						$c = new BlogCatPos();	
-					}					
-					$c->post_id = $model->id;
-					$c->category_id = $d;
-					$c->isdel = 0;					
-					$c->save();								
+				if ($model->save()) {
+					
+					$cs = BlogCatPos::deleteAll("post_id = :id",["id"=>$model->id]);							
+					
+					foreach ($category as $d)
+					{					
+						//$c = BlogCatPos::find()->where("post_id = :id AND category_id = :aid",["id"=>$model->id,"aid"=>intval($d)])->one();					
+						//if (!$c)
+						//{
+							$c = new BlogCatPos();	
+						//}					
+						$c->post_id = $model->id;
+						$c->category_id = $d;
+						$c->isdel = 0;					
+						$c->save();								
+					}
+					
+					$transaction->commit();                                    				
+					return $this->redirect(['view', 'id' => $model->id]);            
 				}
-								
-				return $this->redirect(['view', 'id' => $model->id]);            
-			} 
+				else
+				{
+					$transaction->rollBack();
+				}				
+			} catch (Exception $e) {
+				$transaction->rollBack();
+			}   
 		}	
         
         return $this->render('update', [

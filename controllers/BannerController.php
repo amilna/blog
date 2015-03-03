@@ -129,6 +129,7 @@ class BannerController extends Controller
         $model = new Banner();
         $model->time = date("Y-m-d H:i:s");
         $model->position = $model->getLast();
+        $model->isdel = 0;
 		
 		$transaction = Yii::$app->db->beginTransaction();
 		try {				
