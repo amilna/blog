@@ -18,7 +18,7 @@ use yii\helpers\Url;
     <div class="body-content">
 
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-md-4">
                 <h2>Post</h2>
 
                 <p>Discrete entries of written work, especially with regard to its style or quality, typically displayed in reverse chronological order (the most recent post appears first).</p>
@@ -26,7 +26,7 @@ use yii\helpers\Url;
                 <p><?= Html::a(Yii::t('app','Go to Posts'),['//blog/post'],["class"=>"btn btn-primary"])?>
                 <?= Html::a(Yii::t('app','Manage Posts'),['//blog/post/admin'],["class"=>"btn btn-warning"])?></p>
             </div>
-            <div class="col-lg-4">
+            <div class="col-md-4">
                 <h2>Gallery</h2>
 
                 <p>Page that acts like a room or building for the display of works of art (especially images).</p>
@@ -34,7 +34,7 @@ use yii\helpers\Url;
                 <p><?= Html::a(Yii::t('app','Go to Galleries'),['//blog/gallery'],["class"=>"btn btn-primary"])?>
                 <?= Html::a(Yii::t('app','Manage Galleries'),['//blog/gallery/admin'],["class"=>"btn btn-warning"])?></p>
             </div>
-            <div class="col-lg-4">
+            <div class="col-md-4">
                 <h2>Banner</h2>
 
                 <p>Manage heading or advertisement appearing on a web page in the form of a bar, column, or box.</p>
