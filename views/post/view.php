@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\HtmlPurifier;
 use yii\widgets\ActiveForm;
 use yii\widgets\DetailView;
 use amilna\blog\models\Category;
@@ -34,7 +35,7 @@ $cat = new Category();
 					?>					
 				</div>
 				<div>
-					<?= $model->content ?>
+					<?= HtmlPurifier::process($model->content) ?>
 				</div>				
 			</div>
 		</div>
