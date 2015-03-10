@@ -33,10 +33,11 @@ class PostSearch extends Post
 
     public function attributeLabels()
     {
-        return [
+        return array_merge(parent::attributeLabels(),[
             'term' => Yii::t('app', 'Search'),            
+            'category' => Yii::t('app', 'Category'),            
             'authorName' => Yii::t('app', 'Author'),            
-        ];
+        ]);
     }
 
 	public static function find()

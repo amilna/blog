@@ -30,9 +30,9 @@ class GallerySearch extends Gallery
 	
 	public function attributeLabels()
     {
-        return [
+        return array_merge(parent::attributeLabels(),[
             'term' => Yii::t('app', 'Search'),                 
-        ];
+        ]);
     }
 	
 	public static function find()
