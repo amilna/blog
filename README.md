@@ -9,9 +9,16 @@ The preferred way to install this extension is through [composer](http://getcomp
 
 Since this package do not have stable release on packagist, you should use these settings in your composer.json file :
 
-```
+```json
 "minimum-stability": "dev",
 "prefer-stable": true,
+"repositories":[
+		
+		{
+			"type": "vcs",
+			"url": "https://github.com/aaiyo/yii2-kcfinder"
+		}	
+   ]
 ```
 After, either run
 
@@ -26,18 +33,6 @@ or add
 ```
 
 to the require section of your `composer.json` file.
-
-Since this extensions still use lib in dev stages, be sure also add following line in `composer.json` file.
-
-```json
-"repositories":[
-		
-		{
-			"type": "vcs",
-			"url": "https://github.com/aaiyo/yii2-kcfinder"
-		}	
-   ]
-```
 
 run migration for database
 
