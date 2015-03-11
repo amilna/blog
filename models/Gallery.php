@@ -111,7 +111,7 @@ class Gallery extends \yii\db\ActiveRecord
 
 	public function getTags()
 	{
-		$models = Gallery::find()->all();
+		$models = $this->find()->all();
 		$tags = [];
 		foreach ($models as $m)
 		{
