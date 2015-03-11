@@ -7,7 +7,13 @@ Installation
 
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
-Either run
+Since this package do not have stable release on packagist, you should use these settings in your composer.json file :
+
+```
+"minimum-stability": "dev",
+"prefer-stable": true,
+```
+After, either run
 
 ```
 php composer.phar require --prefer-dist amilna/yii2-blog "dev-master"
