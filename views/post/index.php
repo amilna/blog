@@ -17,17 +17,7 @@ $dataProvider->pagination = [
 ];
 ?>
 <div class="post-index">
-    
-    <div class="pull-right col-md-3 col-xs-6">
-		<form action="<?=Yii::$app->urlManager->createUrl("//blog/post")?>" method="get">
-			<div class="input-group">
-				<input class="form-control input-md" name="PostSearch[term]" id="appendedInputButtons" type="text">
-				<span class="input-group-btn">
-					<button class="btn btn-md" type="submit">Search</button>
-				</span>
-			</div>
-		</form>
-	</div>		
+        	
 	<h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>    
 		
