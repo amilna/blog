@@ -24,8 +24,8 @@ $cat = new Category();
 
 	<div class="row">
 		<!-- Blog Post -->
-		<div class="col-sm-8">
-			<div>
+		<div class="col-sm-8 panel">
+			<div class="panel-body">
 				<div>
 					<h3><?= Html::encode($model->author->username) ?> <small><i class="glyphicon glyphicon-time"></i>  <?= date('D d M, Y',strtotime($model->time)) ?> </small></h3>
 				</div>				
