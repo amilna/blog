@@ -13,6 +13,9 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Posts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
+$this->registerMetaTag(['name' => 'title', 'content' => Html::encode($model->title)]);
+$this->registerMetaTag(['name' => 'description', 'content' => Html::encode($model->description)]);
+
 $cat = new Category();
 ?>
 <div class="post-view">
