@@ -17,8 +17,8 @@ class DefaultController extends Controller
     public function actions()
 	{
 		$module = Yii::$app->getModule('blog');
-		$url = Yii::$app->urlManager->baseUrl.'/'.$module->uploadDir;
-		$path = '@webroot/'.$module->uploadDir;				
+		$url = $module->uploadURL;
+		$path = $module->uploadDir;
 		
 		return [
 			'image-upload' => [

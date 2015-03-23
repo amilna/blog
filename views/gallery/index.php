@@ -63,7 +63,7 @@ $module = Yii::$app->getModule('blog');
 		'itemView'=>(isset($req["GallerySearch"]["tag"])?'_itemTag':'_itemAll'),	
 		/*'itemView' => function ($model, $key, $index, $widget) use ($module) {					
 						$html = '<div class="thumbnail">
-									<a href="'.$model->image.'" class="colorbox" title="'.$model->title.'"><img src="'.str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$model->image).'" alt="'.$model->title.'"></a>
+									<a href="'.$model->image.'" class="colorbox" title="'.$model->title.'"><img src="'.str_replace($module->uploadURL."/",$module->uploadURL."/.thumbs/",$model->image).'" alt="'.$model->title.'"></a>
 									<!--<div class="caption">
 										<h4>'.Html::a($model->title,["//blog/gallery/view?id=".$model->id]).'</h4>
 										<p>'.Html::encode($model->description).'</p>

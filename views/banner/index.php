@@ -134,10 +134,10 @@ $module = Yii::$app->getModule('blog');
 				'attribute' => 'term',
 				'format'=>'html',
 				'value' => function($data) use ($module) {
-					$html = Html::img(str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$data->image),['class'=>'pull-left','style'=>'margin:0 10px 10px 0']);
+					$html = Html::img(str_replace($module->uploadURL."/",$module->uploadURL."/.thumbs/",$data->image),['class'=>'pull-left','style'=>'margin:0 10px 10px 0']);
 					if (!empty($data->front_image))
 					{
-						$html .= Html::img(str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$data->front_image),['class'=>'pull-left','style'=>'margin:0 10px 10px 0']);
+						$html .= Html::img(str_replace($module->uploadURL."/",$module->uploadURL."/.thumbs/",$data->front_image),['class'=>'pull-left','style'=>'margin:0 10px 10px 0']);
 					}
 					return $html;
 				},

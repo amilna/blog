@@ -80,7 +80,7 @@ if ($model["type"] == 1 )
 			if ($model["type"] == 1)
 			{
 				//echo "<iframe align=middle frameborder=0 seamless=true width=100% height=100% class='".$imgclass."' style='max-height:100px:' src='".str_replace("&auto=true","&auto=false",$url)."'></iframe>";					
-				echo Html::img(str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$model['data'][0]),['class'=>$imgclass]);				
+				echo Html::img(str_replace($module->uploadURL."/",$module->uploadURL."/.thumbs/",$model['data'][0]),['class'=>$imgclass]);				
 			}
 			else
 			{
@@ -88,7 +88,7 @@ if ($model["type"] == 1 )
 				foreach ($model['data'] as $data)
 				{
 					$n += 1;
-					echo Html::img(str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$data),['class'=>$imgclass]);				
+					echo Html::img(str_replace($module->uploadURL."/",$module->uploadURL."/.thumbs/",$data),['class'=>$imgclass]);				
 				}
 			}	
 		?>	
