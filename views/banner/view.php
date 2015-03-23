@@ -41,7 +41,7 @@ $module = Yii::$app->getModule('blog');
 					[
 						'attribute'=>'front_image',
 						'format'=>'html',
-						'value'=>(!empty($model->front_image)?(Html::img(str_replace("/".$module->uploadDir."/","/".$module->uploadDir."/.thumbs/",$model->front_image),["class"=>"thumbnail","style"=>"max-width:100%"])):''),
+						'value'=>(!empty($model->front_image)?(Html::img(str_replace($module->uploadURL."/",$module->uploadURL."/.thumbs/",$model->front_image),["class"=>"thumbnail","style"=>"max-width:100%"])):''),
 					],  				  
 					'tags',
 					'url:url',
