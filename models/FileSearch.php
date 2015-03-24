@@ -13,7 +13,7 @@ use amilna\blog\models\File;
 class FileSearch extends File
 {
 
-	
+	public $term;
 
     /**
      * @inheritdoc
@@ -22,7 +22,7 @@ class FileSearch extends File
     {
         return [
             [['id', 'isdel'], 'integer'],
-            [['title', 'description', 'file', 'tags', 'time'], 'safe'],
+            [['title', 'term', 'description', 'file', 'tags', 'time'], 'safe'],
             [['status'], 'boolean'],
         ];
     }
@@ -176,7 +176,8 @@ class FileSearch extends File
 		foreach ($params as $p)
 		{
 			$query->andFilterWhere($p);
-		}		
+		}
+				
 		/* example to use search all in field1,field2,field3 or field4
 		if ($this->term)
 		{
@@ -189,6 +190,8 @@ class FileSearch extends File
 			]);	
 		}	
 		*/
+		
+		$query->andFilterWhere(["like","lower(concat(title,description,file))",strtolower($this->term)]);
 
         return $dataProvider;
     }
