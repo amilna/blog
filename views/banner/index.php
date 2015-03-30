@@ -31,21 +31,21 @@ $module = Yii::$app->getModule('blog');
 		
 		//'css' => 'test.css', // url of css to overide default css relative from @web
 		
-		/* example to overide default themes		
+		/* example to overide default themes */		
 		'itemView'=>function ($model, $key, $widget) {					
 						$type = ['aeroplane','balloon','kite'];
-						$html = '<li>
+						$html = '<li>'.($model->image_only?"":'
 									<div class="info">
 										<h2>'.$model->title.'</h2>
 										<p>'.$model->description.'</p>
-									</div>
+									</div>').'
 									<img class="sky" src="'.$model->image.'" alt="Blue Sky" />
 									<img class="'.$type[$key%3].'" src="'.$model->front_image.'" alt="Aeroplane" />
 								</li>';
 										
 						return $html;
 					},
-		 */
+		 
 		
 		/*	example to overide default options	more options on http://sequencejs.com 
 		'options'=>[

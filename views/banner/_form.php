@@ -56,15 +56,9 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 		<div class="col-md-6">
 			
 			<div class="row">				
-				<div class="col-xs-8">
+				<div class="col-xs-12">
 			<?= $form->field($model, 'title')->textInput(['maxlength' => 65,'placeholder'=>Yii::t('app','Title contain a seo keyword if possible')]) ?>
-				</div>
-				<div class="col-xs-4">
-			<?= $form->field($model, 'status')->widget(SwitchInput::classname(), [			
-					'type' => SwitchInput::CHECKBOX,				
-				]);
-			?>		
-				</div>						
+				</div>				
 			</div>
 
 			<?= $form->field($model, 'description')->textArea(['maxlength' => 155,'placeholder'=>Yii::t('app','This description also used as meta description')]) ?>			
@@ -82,6 +76,20 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 		
 		<div class="col-md-6">
 			<div class="well">
+				<div class="row">
+					<div class="col-xs-6">
+				<?= $form->field($model, 'status')->widget(SwitchInput::classname(), [			
+						'type' => SwitchInput::CHECKBOX,				
+					]);
+				?>		
+					</div>						
+					<div class="col-xs-6">
+				<?= $form->field($model, 'image_only')->widget(SwitchInput::classname(), [			
+						'type' => SwitchInput::CHECKBOX,				
+					]);
+				?>		
+					</div>				
+				</div>			
 				<div class="row">
 					<div class="col-sm-6 ">
 						<?= $form->field($model, 'time')->widget(DateTimePicker::classname(), [				

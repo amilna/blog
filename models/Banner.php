@@ -37,7 +37,7 @@ class Banner extends \yii\db\ActiveRecord
         return [
             [['title', 'description', 'image'], 'required'],
             [['image', 'front_image'], 'string'],
-            [['status'], 'boolean'],
+            [['status','image_only'], 'boolean'],
             [['position', 'isdel'], 'integer'],
             [['time'], 'safe'],
             [['title'], 'string', 'max' => 65],
@@ -60,6 +60,7 @@ class Banner extends \yii\db\ActiveRecord
             'tags' => Yii::t('app', 'Tags'),
             'url' => Yii::t('app', 'Url'),
             'status' => Yii::t('app', 'Status'),
+            'image_only' => Yii::t('app', 'Image Only'),
             'position' => Yii::t('app', 'Position'),
             'time' => Yii::t('app', 'Time'),
             'isdel' => Yii::t('app', 'Isdel'),
