@@ -16,7 +16,7 @@
 	"kartik-v/yii2-widgets": "*",
 	"kartik-v/yii2-date-range": "*",
 	"kartik-v/yii2-grid": "*",
-	"vova07/yii2-imperavi-widget": "*",
+	"vova07/yii2-imperavi-widget": "dev-master",
 	"himiklab/yii2-colorbox-widget" : "*",
 	"iutbay/yii2-fontawesome": "*",
 	"iutbay/yii2-kcfinder" : "dev-master",
