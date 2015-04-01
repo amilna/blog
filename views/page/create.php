@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model amilna\blog\models\StaticPage */
 
 $this->title = Yii::t('app', 'Create {modelClass}', [
-    'modelClass' => 'Static Page',
+    'modelClass' => Yii::t('app','Static Page'),
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Static Pages'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;

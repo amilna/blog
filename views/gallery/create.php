@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model amilna\blog\models\Gallery */
 
 $this->title = Yii::t('app', 'Create {modelClass}', [
-    'modelClass' => 'Gallery',
+    'modelClass' => Yii::t('app','Gallery'),
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Galleries'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;

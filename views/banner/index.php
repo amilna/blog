@@ -77,7 +77,7 @@ $module = Yii::$app->getModule('blog');
     
     <p>
         <?= Html::a(Yii::t('app', 'Create {modelClass}', [
-			'modelClass' => 'Banner',
+			'modelClass' => Yii::t('app','Banner'),
 		]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 

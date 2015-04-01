@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model amilna\blog\models\Category */
 
 $this->title = Yii::t('app', 'Update {modelClass}: ', [
-    'modelClass' => 'Category',
+    'modelClass' => Yii::t('app','Category'),
 ]) . ' ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];

@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model amilna\blog\models\Banner */
 
 $this->title = Yii::t('app', 'Create {modelClass}', [
-    'modelClass' => 'Banner',
+    'modelClass' => Yii::t('app','Banner'),
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Banners'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
