@@ -155,7 +155,7 @@ class Post extends \yii\db\ActiveRecord
 	
 	public function getRecent($limit = 5)
 	{
-		return $this->find()->orderBy('id desc')->limit($limit)->all();		
+		return PostSearch::find()->orderBy('id desc')->limit($limit)->all();		
 	}
 	
 	public function getArchived($limit = 6)
@@ -163,6 +163,7 @@ class Post extends \yii\db\ActiveRecord
 		$res =  $this->db->createCommand("SELECT 
 				substring(concat('',time) from 1 for 7) as month
 				FROM ".$this->tableName()." as p
+				WHERE isdel = 0
 				GROUP BY month				
 				ORDER BY month desc
 				LIMIT :limit")
