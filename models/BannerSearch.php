@@ -170,7 +170,7 @@ class BannerSearch extends Banner
             /**/
         ]);
 
-        $params = self::queryNumber([['id'],['position'],['isdel']]);
+        $params = self::queryNumber([['id',$this->tableName()],['position'],['isdel']]);
 		foreach ($params as $p)
 		{
 			$query->andFilterWhere($p);

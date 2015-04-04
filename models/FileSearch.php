@@ -162,7 +162,7 @@ class FileSearch extends File
             /**/
         ]);
 
-        $params = self::queryNumber([['id'],['isdel']]);
+        $params = self::queryNumber([['id',$this->tableName()],['isdel']]);
 		foreach ($params as $p)
 		{
 			$query->andFilterWhere($p);

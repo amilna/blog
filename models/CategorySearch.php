@@ -164,7 +164,7 @@ class CategorySearch extends Category
             return $dataProvider;
         }				
 		
-        $params = self::queryNumber([['id'],['parent_id'],['status'],['isdel']/*['id','{{%blogcatpos}}'],['id','{{%parent}}'],['id','{{%categories}}']*/]);
+        $params = self::queryNumber([['id',$this->tableName()],['parent_id'],['status'],['isdel']/*['id','{{%blogcatpos}}'],['id','{{%parent}}'],['id','{{%categories}}']*/]);
 		foreach ($params as $p)
 		{
 			$query->andFilterWhere($p);

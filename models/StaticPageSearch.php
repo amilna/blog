@@ -168,7 +168,7 @@ class StaticPageSearch extends StaticPage
             return $dataProvider;
         }				
 		
-        $params = self::queryNumber([['id'],['status'],['isdel']]);
+        $params = self::queryNumber([['id',$this->tableName()],['status'],['isdel']]);
 		foreach ($params as $p)
 		{
 			$query->andFilterWhere($p);

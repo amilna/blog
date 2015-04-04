@@ -37,8 +37,8 @@ $kcfOptions = array_merge([], [
 		'files'    =>  "",        
         'images'   =>  "*img",
     ],
-    'thumbWidth' => 260,
-    'thumbHeight' => 260,        
+    'thumbWidth' => 200,
+    'thumbHeight' => 200,        
 ]);
 
 // Set kcfinder session options
