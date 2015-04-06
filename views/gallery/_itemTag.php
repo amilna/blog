@@ -69,7 +69,7 @@ if ($model["type"] == 1 )
 				{
 					$class = "";
 					$imgclass = "col-xs-6";
-					$durl= ["//blog/gallery/index","GallerySearch[tag]"=>strtolower($model['title'])];
+					$durl= ["//blog/gallery/index","tag"=>strtolower($model['title'])];
 					$url = Yii::$app->urlManager->createUrl($durl);
 				}
 			?>

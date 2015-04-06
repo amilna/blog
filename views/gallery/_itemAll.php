@@ -71,7 +71,7 @@ if ($model["type"] == 1 )
 				{
 					$class = "";
 					$imgclass = "nopadding col-xs-".(12/pow(2,(count($model['data'])-1)/max(1,(count($model['data'])-1))));
-					$durl= ["//blog/gallery/index","GallerySearch[tag]"=>strtolower($model['title'])];
+					$durl= ["//blog/gallery/index","tag"=>strtolower($model['title'])];
 					$url = Yii::$app->urlManager->createUrl($durl);
 				}
 			?>

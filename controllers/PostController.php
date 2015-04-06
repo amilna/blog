@@ -32,11 +32,13 @@ class PostController extends Controller
      * @params string $format, array $arraymap, string $term
      * @return mixed
      */
-    public function actionIndex($format= false,$arraymap= false,$term = false)
+    public function actionIndex($format= false,$arraymap= false,$term = false,$category = false,$time = false)
     {                
         $searchModel = new PostSearch();        
         $req = Yii::$app->request->queryParams;
         if ($term) { $req[basename(str_replace("\\","/",get_class($searchModel)))]["term"] = $term;}        
+        if ($category) { $req[basename(str_replace("\\","/",get_class($searchModel)))]["category"] = $category;}        
+        if ($time) { $req[basename(str_replace("\\","/",get_class($searchModel)))]["time"] = $time;}
         $dataProvider = $searchModel->search($req);				
 
         if ($format == 'json')

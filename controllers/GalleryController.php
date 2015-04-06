@@ -31,12 +31,15 @@ class GalleryController extends Controller
      * @params string $format, array $arraymap, string $term
      * @return mixed
      */
-    public function actionIndex($format= false,$arraymap= false,$term = false)
+    public function actionIndex($format= false,$arraymap= false,$term = false,$tag = false)
     {
         $searchModel = new GallerySearch();        
         $req = Yii::$app->request->queryParams;
         if ($term) { 
 			$req[basename(str_replace("\\","/",get_class($searchModel)))]["term"] = $term;			
+        }        
+        if ($tag) { 
+			$req[basename(str_replace("\\","/",get_class($searchModel)))]["tag"] = $tag;			
         }        
         $req[basename(str_replace("\\","/",get_class($searchModel)))]["status"] = 1;
         $dataProvider = $searchModel->search($req);				

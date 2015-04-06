@@ -73,7 +73,7 @@ $cat = new Category();
 				<?php
 					foreach ($model->getRecent() as $m)
 					{
-						echo '<li>'.Html::a($m->title,["//blog/post/view?id=".$m->id]).'</li>';
+						echo '<li>'.Html::a($m->title,["//blog/post/view","id"=>$m->id,"title"=>$m->title]).'</li>';
 					}				
 				?>		
 			</ul>
@@ -83,7 +83,7 @@ $cat = new Category();
 				<?php
 					foreach ($cat->parents() as $c)
 					{
-						echo '<li>'.Html::a($c->title,["//blog/post/index?PostSearch[category]=".$c->title]).'</li>';
+						echo '<li>'.Html::a($c->title,["//blog/post/index","category"=>$c->title]).'</li>';
 					}				
 				?>						
 			</ul>
@@ -93,7 +93,7 @@ $cat = new Category();
 				<?php
 					foreach ($model->getArchived() as $m)
 					{
-						echo '<li>'.Html::a(date('M Y',strtotime($m["month"])),["//blog/post/index?PostSearch[time]=".$m["month"]]).'</li>';
+						echo '<li>'.Html::a(date('M Y',strtotime($m["month"])),["//blog/post/index","time"=>$m["month"]]).'</li>';
 					}				
 				?>				
 			</ul>
