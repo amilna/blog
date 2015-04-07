@@ -10,7 +10,7 @@ use vova07\imperavi\actions\GetAction;
 class DefaultController extends Controller
 {
     public function actionIndex()
-    {
+    {        
         return $this->render('index');
     }
     

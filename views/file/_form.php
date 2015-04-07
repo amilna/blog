@@ -16,8 +16,8 @@ $module = Yii::$app->getModule('blog');
 // kcfinder options
 // http://kcfinder.sunhater.com/install#dynamic
 $kcfOptions = array_merge([], [
-    'uploadURL' => Yii::getAlias('@web').'/'.$module->uploadDir,
-    'uploadDir' => Yii::getAlias('@webroot').'/'.$module->uploadDir,
+    'uploadURL' => Yii::getAlias($module->uploadURL),
+    'uploadDir' => Yii::getAlias($module->uploadDir),
     'access' => [
         'files' => [
             'upload' => true,
@@ -37,8 +37,8 @@ $kcfOptions = array_merge([], [
         'images'   =>  "*img",
         'videos'   =>  "ogg flv mp4",
     ],
-    'thumbWidth' => 260,
-    'thumbHeight' => 260,              
+    'thumbWidth' => 200,
+    'thumbHeight' => 200,              
 ]);
 
 // Set kcfinder session options
