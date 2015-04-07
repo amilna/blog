@@ -67,7 +67,8 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 				'settings' => [
 					'lang' => substr(Yii::$app->language,0,2),
 					'minHeight' => 400,
-					'toolbarFixedTopOffset'=>50,			
+					'toolbarFixedTopOffset'=>50,	
+					'buttonSource'=> true,		
 					'imageUpload' => Url::to(['//blog/default/image-upload']),
 					'imageManagerJson' => Url::to(['//blog/default/images-get']),			
 					'fileUpload' => Url::to(['//blog/default/file-upload']),
