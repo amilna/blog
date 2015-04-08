@@ -18,8 +18,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>    
 
 	<div class="row">		
-		<div class="col-sm-12">
-			<div>
+		<div class="col-sm-12 panel">			
+			<div class="panel-body">
 				<div>
 					<h3><small><i class="glyphicon glyphicon-time"></i>  <?= date('D d M, Y',strtotime($model->time)) ?> </small></h3>
 				</div>								
