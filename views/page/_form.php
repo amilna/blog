@@ -83,7 +83,9 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 					],
 					'buttons'=> ['html','formatting', 'bold', 'italic','underline','deleted', 'unorderedlist', 'orderedlist',
 					  'outdent', 'indent', 'image', 'file', 'link', 'alignment', 'horizontalrule'
-					]
+					],
+					'replaceDivs'=> false,
+					'deniedTags'=> ['script']
 				],
 				'options'=>["style"=>"width:100%"]
 			]);
