@@ -33,7 +33,7 @@ class StaticPage extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'description', 'content'], 'required'],
-            [['content'], 'string'],
+            [['content','scripts'], 'string'],
             [['status', 'isdel'], 'integer'],
             [['time'], 'safe'],
             [['title'], 'string', 'max' => 65],
@@ -54,6 +54,7 @@ class StaticPage extends \yii\db\ActiveRecord
             'content' => Yii::t('app', 'Content'),
             'tags' => Yii::t('app', 'Tags'),
             'status' => Yii::t('app', 'Status'),
+            'scripts' => Yii::t('app', 'Scripts'),
             'time' => Yii::t('app', 'Time'),
             'isdel' => Yii::t('app', 'Isdel'),
         ];

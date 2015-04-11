@@ -31,3 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
 	</div>
 
 </div>
+
+<script>
+<?php $this->beginBlock('STATIC_SCRIPTS') ?>
+<?= $model->scripts ?>   
+<?php $this->endBlock(); ?>
+</script>
+<?php
+yii\web\YiiAsset::register($this);
+$this->registerJs($this->blocks['STATIC_SCRIPTS'], yii\web\View::POS_END);

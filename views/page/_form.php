@@ -88,6 +88,8 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 				'options'=>["style"=>"width:100%"]
 			]);
 			?>
+			
+			<?= $form->field($model, 'scripts')->textArea(['rows'=>6,'placeholder'=>Yii::t('app','JavaScripts')]) ?>
 		</div>
 		<div class="col-md-3">
 			<div class="well">
