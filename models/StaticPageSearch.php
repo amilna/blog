@@ -190,7 +190,7 @@ class StaticPageSearch extends StaticPage
 				["OR","lower(description) like '%".strtolower($this->term)."%'",
 					["OR","lower(tags) like '%".strtolower($this->term)."%'",
 						["OR","lower(content) like '%".strtolower($this->term)."%'",
-							"{{%blog_static}}.id = ANY ('".$res."')"
+							$this->tableName().".id = ANY ('".$res."')"
 						]
 					]
 				]

@@ -23,7 +23,7 @@ class BlogCatPos extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {        
-        $mod = new BlogCatPos();        
+        $mod = new BlogCatPos();         
         return $mod->dynTableName;
     }    
 

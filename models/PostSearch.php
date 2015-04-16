@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use amilna\blog\models\Post;
+use amilna\blog\models\BlogCatPos;
 
 /**
  * PostSearch represents the model behind the search form about `amilna\blog\models\Post`.
@@ -201,12 +202,13 @@ class PostSearch extends Post
 		$query->andFilterWhere(['like','lower('.$userClass::tableName().'.username)',strtolower($this->authorName)]);
 		
 		if ($this->category || $this->term)
-		{
+		{			
+			
 			$term = ($this->term?$this->term:$this->category);
 			$cquery =  $this->find()	
-					->select(["array_agg({{%blog_post}}.id)"])					
-					->leftJoin("{{%blog_cat_pos}} as cp","{{%blog_post}}.id = cp.post_id")
-					->leftJoin("{{%blog_category}} as c","cp.category_id = c.id");										
+					->select(["array_agg(".$this->tableName().".id)"])					
+					->leftJoin(BlogCatPos::tableName()." as cp",$this->tableName().".id = cp.post_id")
+					->leftJoin(Category::tableName()." as c","cp.category_id = c.id");										
 					
 			if ($this->category)
 			{				
@@ -222,7 +224,7 @@ class PostSearch extends Post
 				
 			if ($this->category)
 			{
-				$query->andFilterWhere(["OR","false","{{%blog_post}}.id = ANY ('".$res."')"]);				
+				$query->andFilterWhere(["OR","false",$this->tableName().".id = ANY ('".$res."')"]);				
 			}
 			else
 			{		
@@ -230,7 +232,7 @@ class PostSearch extends Post
 					["OR","lower(description) like '%".strtolower($this->term)."%'",
 						["OR","lower(tags) like '%".strtolower($this->term)."%'",
 							["OR","lower(content) like '%".strtolower($this->term)."%'",
-								"{{%blog_post}}.id = ANY ('".$res."')"
+								$this->tableName().".id = ANY ('".$res."')"
 							]
 						]
 					]
