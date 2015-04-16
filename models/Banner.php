@@ -21,12 +21,15 @@ use Yii;
  */
 class Banner extends \yii\db\ActiveRecord
 {
+    public $dynTableName = '{{%blog_banner}}';    
+    
     /**
      * @inheritdoc
      */
     public static function tableName()
-    {
-        return '{{%blog_banner}}';
+    {        
+        $mod = new Banner();        
+        return $mod->dynTableName;
     }
 
     /**

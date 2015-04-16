@@ -19,12 +19,15 @@ use Yii;
  */
 class Gallery extends \yii\db\ActiveRecord
 {
+    public $dynTableName = '{{%blog_gallery}}';
+    
     /**
      * @inheritdoc
      */
     public static function tableName()
-    {
-        return '{{%blog_gallery}}';
+    {        
+        $mod = new Gallery();        
+        return $mod->dynTableName;              
     }
 
     /**

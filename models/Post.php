@@ -25,14 +25,16 @@ use Yii;
  */
 class Post extends \yii\db\ActiveRecord
 {
+    public $dynTableName = '{{%blog_post}}';
+    
     /**
      * @inheritdoc
      */
     public static function tableName()
-    {
-        return '{{%blog_post}}';
-    }        
-
+    {        
+        $mod = new Post();        
+        return $mod->dynTableName;              
+	}
     /**
      * @inheritdoc
      */

@@ -18,12 +18,15 @@ use Yii;
  */
 class StaticPage extends \yii\db\ActiveRecord
 {
+    public $dynTableName = '{{%blog_static}}';
+    
     /**
      * @inheritdoc
      */
     public static function tableName()
-    {
-        return '{{%blog_static}}';
+    {        
+        $mod = new StaticPage();        
+        return $mod->dynTableName;              
     }
 
     /**

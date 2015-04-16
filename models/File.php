@@ -19,12 +19,15 @@ use Yii;
  */
 class File extends \yii\db\ActiveRecord
 {
+   public $dynTableName = '{{%blog_files}}';
+    
     /**
      * @inheritdoc
      */
     public static function tableName()
-    {
-        return '{{%blog_files}}';
+    {        
+        $mod = new File();        
+        return $mod->dynTableName;        
     }
 
     /**

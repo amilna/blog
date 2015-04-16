@@ -16,13 +16,16 @@ use Yii;
  */
 class BlogCatPos extends \yii\db\ActiveRecord
 {
+    public $dynTableName = '{{%blog_cat_pos}}';    
+    
     /**
      * @inheritdoc
      */
     public static function tableName()
-    {
-        return '{{%blog_cat_pos}}';
-    }
+    {        
+        $mod = new BlogCatPos();        
+        return $mod->dynTableName;
+    }    
 
     /**
      * @inheritdoc
