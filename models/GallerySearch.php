@@ -168,10 +168,12 @@ class GallerySearch extends Gallery
 		
         $query->andFilterWhere([
             'status' => $this->status,
+            'type' => $this->type,
+            'isdel' => $this->isdel,
             /**/
         ]);
 
-        $params = self::queryNumber([['id',$this->tableName()],['type'],['isdel']]);
+        $params = self::queryNumber([['id',$this->tableName()]]);
 		foreach ($params as $p)
 		{
 			$query->andFilterWhere($p);

@@ -167,8 +167,14 @@ class StaticPageSearch extends StaticPage
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }				
+        
+        $query->andFilterWhere([
+            'status' => $this->status,           
+            'isdel' => $this->isdel,
+            /**/
+        ]);
 		
-        $params = self::queryNumber([['id',$this->tableName()],['status'],['isdel']]);
+        $params = self::queryNumber([['id',$this->tableName()]]);
 		foreach ($params as $p)
 		{
 			$query->andFilterWhere($p);

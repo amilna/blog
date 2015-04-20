@@ -88,7 +88,7 @@ $module = Yii::$app->getModule('blog');
 		'caption'=>Yii::t('app', 'Banner'),
 		'headerRowOptions'=>['class'=>'kartik-sheet-style','style'=>'background-color: #fdfdfd'],
 		'filterRowOptions'=>['class'=>'kartik-sheet-style skip-export','style'=>'background-color: #fdfdfd'],
-		'pjax' => false,
+		'pjax' => true,
 		'bordered' => true,
 		'striped' => true,
 		'condensed' => true,
@@ -103,7 +103,7 @@ $module = Yii::$app->getModule('blog');
 		],
 		'toolbar' => [
 			['content'=>				
-				Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['index'], ['data-pjax'=>false, 'class' => 'btn btn-default', 'title'=>Yii::t('app', 'Reset Grid')])
+				Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['index'], ['data-pjax'=>true, 'class' => 'btn btn-default', 'title'=>Yii::t('app', 'Reset Grid')])
 			],
 			'{export}',
 			'{toggleData}'

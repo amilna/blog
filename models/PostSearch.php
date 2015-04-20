@@ -183,7 +183,14 @@ class PostSearch extends Post
             return $dataProvider;
         }				
 		
-        $params = self::queryNumber([['id',$this->tableName()],['author_id'],['isfeatured'],['status'],['isdel']/*['id','{{%blogcatpos}}'],['id','{{%author}}']*/]);
+		$query->andFilterWhere([
+            'status' => $this->status,           
+            'isdel' => $this->isdel,
+            'isfeatured' => $this->isfeatured,
+            /**/
+        ]);
+		
+        $params = self::queryNumber([['id',$this->tableName()],['author_id']/*['id','{{%blogcatpos}}'],['id','{{%author}}']*/]);
 		foreach ($params as $p)
 		{
 			$query->andFilterWhere($p);
