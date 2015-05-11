@@ -219,8 +219,14 @@ class GalleryController extends Controller
         $model->time = date("Y-m-d H:i:s");	
         $model->type = 0;
         $model->isdel = 0;
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+		
+		$post = Yii::$app->request->post();
+		if (isset($post['Gallery']['tags']))
+		{
+			$post['Gallery']['tags'] = implode(",",$post['Gallery']['tags']);
+		}
+		
+        if ($model->load($post) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -238,8 +244,16 @@ class GalleryController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+		
+		$model->tags = !empty($model->tags)?explode(",",$model->tags):[];
+		
+		$post = Yii::$app->request->post();
+		if (isset($post['Gallery']['tags']))
+		{
+			$post['Gallery']['tags'] = implode(",",$post['Gallery']['tags']);
+		}
+		
+        if ($model->load($post) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

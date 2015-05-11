@@ -185,7 +185,13 @@ class PostController extends Controller
 			if (isset($post['Post']['category']))
 			{
 				$category = $post['Post']['category'];
-			}			
+			}		
+			
+			if (is_array($post['Post']['tags']))
+			{
+				$post['Post']['tags'] = implode(",",$post['Post']['tags']);
+			}		
+				
 			$model->load($post);
 			
 			$transaction = Yii::$app->db->beginTransaction();
@@ -231,6 +237,7 @@ class PostController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);		
+		$model->tags = !empty($model->tags)?explode(",",$model->tags):[];				
 		
 		if (Yii::$app->request->post())        
         {
@@ -240,6 +247,12 @@ class PostController extends Controller
 			{
 				$category = $post['Post']['category'];
 			}			
+			
+			if (is_array($post['Post']['tags']))
+			{
+				$post['Post']['tags'] = implode(",",$post['Post']['tags']);
+			}		
+        
 			$model->load($post);
 			
 			$transaction = Yii::$app->db->beginTransaction();

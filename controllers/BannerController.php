@@ -131,9 +131,15 @@ class BannerController extends Controller
         $model->position = $model->getLast();
         $model->isdel = 0;
 		
+		$post = Yii::$app->request->post();
+		if (isset($post['Banner']['tags']))
+		{
+			$post['Banner']['tags'] = implode(",",$post['Banner']['tags']);
+		}
+		
 		$transaction = Yii::$app->db->beginTransaction();
 		try {				
-			if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			if ($model->load($post) && $model->save()) {
 				$model->updatePosition($model->position);
 				$transaction->commit();
 				return $this->redirect(['view', 'id' => $model->id]);
@@ -161,10 +167,18 @@ class BannerController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        
+		$model->tags = !empty($model->tags)?explode(",",$model->tags):[];
+		
+		$post = Yii::$app->request->post();
+		if (isset($post['Banner']['tags']))
+		{
+			$post['Banner']['tags'] = implode(",",$post['Banner']['tags']);
+		}
 		
 		$transaction = Yii::$app->db->beginTransaction();
 		try {				
-			if ($model->load(Yii::$app->request->post()) && $model->save()) {
+			if ($model->load($post) && $model->save()) {
 				$model->updatePosition($model->position);
 				$transaction->commit();
 				return $this->redirect(['view', 'id' => $model->id]);

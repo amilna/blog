@@ -173,8 +173,14 @@ class FileController extends Controller
         $model = new File();
         $model->time = date("Y-m-d H:i:s");	        
         $model->isdel = 0;
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+		
+		$post = Yii::$app->request->post();
+		if (isset($post['File']['tags']))
+		{
+			$post['File']['tags'] = implode(",",$post['File']['tags']);
+		}
+		
+        if ($model->load($post) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -192,8 +198,17 @@ class FileController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+		
+		$model->tags = !empty($model->tags)?explode(",",$model->tags):[];
+		
+		$post = Yii::$app->request->post();
+		if (isset($post['File']['tags']))
+		{
+			$post['File']['tags'] = implode(",",$post['File']['tags']);
+		}
+		
+		
+        if ($model->load($post) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

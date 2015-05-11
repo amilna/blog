@@ -38,10 +38,10 @@ class StaticPage extends \yii\db\ActiveRecord
             [['title', 'description', 'content'], 'required'],
             [['content','scripts'], 'string'],
             [['status', 'isdel'], 'integer'],
-            [['time'], 'safe'],
+            [['tags', 'time'], 'safe'],
             [['title'], 'string', 'max' => 65],
             [['description'], 'string', 'max' => 155],
-            [['tags'], 'string', 'max' => 255]
+            //[['tags'], 'string', 'max' => 255]
         ];
     }
 
@@ -117,7 +117,7 @@ class StaticPage extends \yii\db\ActiveRecord
 			{	
 				if (!in_array($t,$tags))
 				{
-					array_push($tags,$t);	
+					$tags[$t] = $t;
 				}
 			}	
 		}

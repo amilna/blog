@@ -119,8 +119,10 @@ foreach ($model->blogCatPos as $c)
 					'options' => [
 						'placeholder' => Yii::t('app','Put additional tags ...'),
 					],
+					'data'=>$model->getTags(),
 					'pluginOptions' => [
-						'tags' => $model->getTags(),
+						'tags' => true,
+						'tokenSeparators'=>[',',' '],
 					],
 				]) ?>		
 				

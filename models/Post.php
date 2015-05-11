@@ -45,10 +45,10 @@ class Post extends \yii\db\ActiveRecord
             [['content', 'image'], 'string'],
             [['author_id', 'status', 'isdel'], 'integer'],
             [['isfeatured'], 'boolean'],
-            [['time'], 'safe'],
+            [['tags','time'], 'safe'],
             [['title'], 'string', 'max' => 65],
             [['description'], 'string', 'max' => 155],
-            [['tags'], 'string', 'max' => 255]
+            //[['tags'], 'string', 'max' => 255]
         ];
     }
 	
@@ -148,7 +148,7 @@ class Post extends \yii\db\ActiveRecord
 			{	
 				if (!in_array($t,$tags))
 				{
-					array_push($tags,$t);	
+					$tags[$t] = $t;
 				}
 			}	
 		}

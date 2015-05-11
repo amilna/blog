@@ -42,10 +42,10 @@ class Banner extends \yii\db\ActiveRecord
             [['image', 'front_image'], 'string'],
             [['status','image_only'], 'boolean'],
             [['position', 'isdel'], 'integer'],
-            [['time'], 'safe'],
+            [['tags','time'], 'safe'],
             [['title'], 'string', 'max' => 65],
             [['description'], 'string', 'max' => 155],
-            [['tags', 'url'], 'string', 'max' => 255]
+            [[ 'url'], 'string', 'max' => 255]
         ];
     }
 
@@ -123,7 +123,7 @@ class Banner extends \yii\db\ActiveRecord
 			{	
 				if (!in_array($t,$tags))
 				{
-					array_push($tags,$t);	
+					$tags[$t] = $t;
 				}
 			}	
 		}
