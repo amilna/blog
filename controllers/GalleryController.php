@@ -223,7 +223,10 @@ class GalleryController extends Controller
 		$post = Yii::$app->request->post();
 		if (isset($post['Gallery']['tags']))
 		{
-			$post['Gallery']['tags'] = implode(",",$post['Gallery']['tags']);
+			if (is_array($post['Gallery']['tags']))
+			{
+				$post['Gallery']['tags'] = implode(",",$post['Gallery']['tags']);
+			}	
 		}
 		
         if ($model->load($post) && $model->save()) {
@@ -250,7 +253,10 @@ class GalleryController extends Controller
 		$post = Yii::$app->request->post();
 		if (isset($post['Gallery']['tags']))
 		{
-			$post['Gallery']['tags'] = implode(",",$post['Gallery']['tags']);
+			if (is_array($post['Gallery']['tags']))
+			{
+				$post['Gallery']['tags'] = implode(",",$post['Gallery']['tags']);
+			}	
 		}
 		
         if ($model->load($post) && $model->save()) {

@@ -134,7 +134,10 @@ class BannerController extends Controller
 		$post = Yii::$app->request->post();
 		if (isset($post['Banner']['tags']))
 		{
-			$post['Banner']['tags'] = implode(",",$post['Banner']['tags']);
+			if (is_array($post['Banner']['tags']))
+			{
+				$post['Banner']['tags'] = implode(",",$post['Banner']['tags']);
+			}	
 		}
 		
 		$transaction = Yii::$app->db->beginTransaction();
@@ -173,7 +176,10 @@ class BannerController extends Controller
 		$post = Yii::$app->request->post();
 		if (isset($post['Banner']['tags']))
 		{
-			$post['Banner']['tags'] = implode(",",$post['Banner']['tags']);
+			if (is_array($post['Banner']['tags']))
+			{
+				$post['Banner']['tags'] = implode(",",$post['Banner']['tags']);
+			}	
 		}
 		
 		$transaction = Yii::$app->db->beginTransaction();

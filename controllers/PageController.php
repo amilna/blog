@@ -122,7 +122,10 @@ class PageController extends Controller
         $post = Yii::$app->request->post();
 		if (isset($post['StaticPage']['tags']))
 		{
-			$post['StaticPage']['tags'] = implode(",",$post['StaticPage']['tags']);
+			if (is_array($post['StaticPage']['tags']))
+			{
+				$post['StaticPage']['tags'] = implode(",",$post['StaticPage']['tags']);
+			}	
 		}
 		
         if ($model->load($post) && $model->save()) {
@@ -148,7 +151,10 @@ class PageController extends Controller
 		$post = Yii::$app->request->post();
 		if (isset($post['StaticPage']['tags']))
 		{
-			$post['StaticPage']['tags'] = implode(",",$post['StaticPage']['tags']);
+			if (is_array($post['StaticPage']['tags']))
+			{
+				$post['StaticPage']['tags'] = implode(",",$post['StaticPage']['tags']);
+			}	
 		}
 		
         if ($model->load($post) && $model->save()) {

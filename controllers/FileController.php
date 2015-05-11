@@ -177,7 +177,10 @@ class FileController extends Controller
 		$post = Yii::$app->request->post();
 		if (isset($post['File']['tags']))
 		{
-			$post['File']['tags'] = implode(",",$post['File']['tags']);
+			if (is_array($post['File']['tags']))
+			{
+				$post['File']['tags'] = implode(",",$post['File']['tags']);
+			}	
 		}
 		
         if ($model->load($post) && $model->save()) {
@@ -204,7 +207,10 @@ class FileController extends Controller
 		$post = Yii::$app->request->post();
 		if (isset($post['File']['tags']))
 		{
-			$post['File']['tags'] = implode(",",$post['File']['tags']);
+			if (is_array($post['File']['tags']))
+			{
+				$post['File']['tags'] = implode(",",$post['File']['tags']);
+			}	
 		}
 		
 		
