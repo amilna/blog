@@ -115,7 +115,8 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 						'multiple' => false,
 						'kcfOptions'=>$kcfOptions,	
 						'kcfBrowseOptions'=>[
-							'type'=>'images'				
+							'type'=>'images',
+							'lng'=>substr(Yii::$app->language,0,2),				
 						]	
 					]);	
 				?>							
@@ -129,7 +130,8 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 						'multiple' => false,
 						'kcfOptions'=>$kcfOptions,	
 						'kcfBrowseOptions'=>[
-							'type'=>'videos'				
+							'type'=>'videos',
+							'lng'=>substr(Yii::$app->language,0,2),				
 						],					
 					]);	
 				?>
@@ -154,6 +156,15 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 	
 <?php $this->beginBlock('VIDEOS') ?>			
 
+function baseName(str,wext)
+{
+	var base = new String(str).substring(str.lastIndexOf('/') + 1); 
+	if(base.lastIndexOf(".") != -1 && typeof wext == "undefined") {
+		base = base.substring(0, base.lastIndexOf("."));		
+	}    
+	return base;
+}
+
 $("#gallery-type").change(function() {	
 	$("#videos").css("display",($(this).val() == 1?"":"none"));	
 });
@@ -164,13 +175,22 @@ $('#videos .kcf-thumbs').bind("DOMSubtreeModified",function(){
 	if (sel.length > 0 && $('#videos .kcf-thumbs').html().replace(/ /g,"") != "")
 	{
 		url = sel.val();
+		$('#filesrc .kcf-thumbs img').each(function(i,img){
+			var src = $(img).attr("src");
+			var ext = baseName(src);
+			if (ext != 'flv')
+			{
+				$(img).attr("src",src.replace(ext+".png","flv.png"));
+			}			
+		});
 	}	
 	$('#gallery-url').val(url);
 });
 
 
 var video = "<?= $model->url?>";
-var thumb = "<?= Yii::$app->assetManager->getPublishedUrl((new \iutbay\yii2kcfinder\KCFinderAsset)->sourcePath) ?>/themes/default/img/files/big/<?= substr($model->url,-3)?>.png";
+//var thumb = "<?= Yii::$app->assetManager->getPublishedUrl((new \iutbay\yii2kcfinder\KCFinderAsset)->sourcePath) ?>/themes/default/img/files/big/<?= substr($model->url,-3)?>.png";
+var thumb = "<?= Yii::$app->assetManager->getPublishedUrl((new \iutbay\yii2kcfinder\KCFinderAsset)->sourcePath) ?>/themes/default/img/files/big/flv.png";
 if (video != "")
 {
 	var html = '<li class="sortable ui-sortable-handle"><div class="remove"><span class="fa fa-trash"></span></div><img src="'+thumb+'"><input type="hidden" name="videos_url" value="'+video+'"></li>';	

@@ -104,7 +104,8 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 						'multiple' => false,
 						'kcfOptions'=>$kcfOptions,	
 						'kcfBrowseOptions'=>[
-							'type'=>'files'				
+							'type'=>'files',
+							'lng'=>substr(Yii::$app->language,0,2),				
 						]	
 					]);	
 				?>							

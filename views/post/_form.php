@@ -157,7 +157,8 @@ foreach ($model->blogCatPos as $c)
 					'multiple' => false,
 					'kcfOptions'=>$kcfOptions,					
 					'kcfBrowseOptions'=>[
-						'type'=>'images'				
+						'type'=>'images',
+						'lng'=>substr(Yii::$app->language,0,2),				
 					]					
 				]);
 				

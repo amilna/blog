@@ -55,7 +55,7 @@ use yii\helpers\Url;
 
                 <p>Manage files that available to be downloaded by users.</p>
 
-                <p><?= Html::a(Yii::t('app','Manage Files'),['//blog/file'],["class"=>"btn btn-primary"])?></p>
+                <p><?= Html::a(Yii::t('app','Manage Files'),['//blog/file/admin'],["class"=>"btn btn-primary"])?></p>
             </div>            
         </div>
 

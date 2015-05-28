@@ -130,7 +130,8 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 								'multiple' => false,
 								'kcfOptions'=>$kcfOptions,	
 								'kcfBrowseOptions'=>[
-									'type'=>'images'				
+									'type'=>'images',
+									'lng'=>substr(Yii::$app->language,0,2),				
 								]	
 							]);	
 						?>							
@@ -141,7 +142,8 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 								'multiple' => false,
 								'kcfOptions'=>$kcfOptions,	
 								'kcfBrowseOptions'=>[
-									'type'=>'images'				
+									'type'=>'images',
+									'lng'=>substr(Yii::$app->language,0,2),				
 								]	
 							]);	
 						?>	

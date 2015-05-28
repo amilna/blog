@@ -39,7 +39,7 @@ class m150205_031747_amilna_blog extends Migration
             'post_id' => Schema::TYPE_INTEGER. ' NOT NULL',            
             'isdel' => Schema::TYPE_SMALLINT.' NOT NULL DEFAULT 0',
         ]);
-        $this->addForeignKey( $this->db->tablePrefix.'blog_cat_pos_categroy_id', $this->db->tablePrefix.'blog_cat_pos', 'category_id', $this->db->tablePrefix.'blog_category', 'id', 'CASCADE', null );
+        $this->addForeignKey( $this->db->tablePrefix.'blog_cat_pos_category_id', $this->db->tablePrefix.'blog_cat_pos', 'category_id', $this->db->tablePrefix.'blog_category', 'id', 'CASCADE', null );
         $this->addForeignKey( $this->db->tablePrefix.'blog_cat_pos_post_id', $this->db->tablePrefix.'blog_cat_pos', 'post_id', $this->db->tablePrefix.'blog_post', 'id', 'CASCADE', null );
         
         $this->createTable($this->db->tablePrefix.'blog_gallery', [

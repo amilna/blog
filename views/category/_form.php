@@ -94,7 +94,8 @@ $listParent = []+ArrayHelper::map(($model->isNewRecord?$model->parents():$model-
 					'multiple' => false,
 					'kcfOptions'=>$kcfOptions,	
 					'kcfBrowseOptions'=>[
-						'type'=>'images'				
+						'type'=>'images',
+						'lng'=>substr(Yii::$app->language,0,2),				
 					]	
 				]);	
 			?>							
