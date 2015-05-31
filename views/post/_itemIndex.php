@@ -22,7 +22,7 @@ $module = Yii::$app->getModule('blog');
 		?>									
 			<div class="caption text-left"  style="margin:0px 0px 0px <?=($model->image != null?"30%":"0px")?>;background:#ffffff;padding:20px;">
 				<h3><?= Html::a($model->title,["//blog/post/view","id"=>$model->id,"title"=>$model->title]) ?></h3>
-				<h5><?= Html::encode($model->author->username) ?> <small><?= Html::encode(date('D d M, Y',strtotime($model->time))) ?></small></h5>									
+				<h5><?= Html::encode($model->author?$model->author->username:"") ?> <small><?= Html::encode(date('D d M, Y',strtotime($model->time))) ?></small></h5>									
 			
 				<p class=""><?= Html::encode($model->description) ?></p>
 				<p>
