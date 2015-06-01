@@ -14,36 +14,38 @@ use kartik\touchspin\TouchSpin;
 use iutbay\yii2kcfinder\KCFinderInputWidget;
 
 $module = Yii::$app->getModule('blog');
-// kcfinder options
-// http://kcfinder.sunhater.com/install#dynamic
-$kcfOptions = array_merge([], [
-    'uploadURL' => Yii::getAlias($module->uploadURL),
-    'uploadDir' => Yii::getAlias($module->uploadDir),
-    'access' => [
-        'files' => [
-            'upload' => true,
-            'delete' => true,
-            'copy' => true,
-            'move' => true,
-            'rename' => true,
-        ],
-        'dirs' => [
-            'create' => true,
-            'delete' => true,
-            'rename' => true,
-        ],
-    ],
-    'types'=>[
-		'files'    =>  "",        
-        'images'   =>  "*img",
-    ],
-    'thumbWidth' => 200,
-    'thumbHeight' => 200,        
-]);
+if ($module->enableUpload)
+{
+	// kcfinder options
+	// http://kcfinder.sunhater.com/install#dynamic
+	$kcfOptions = array_merge([], [
+		'uploadURL' => Yii::getAlias($module->uploadURL),
+		'uploadDir' => Yii::getAlias($module->uploadDir),
+		'access' => [
+			'files' => [
+				'upload' => true,
+				'delete' => true,
+				'copy' => true,
+				'move' => true,
+				'rename' => true,
+			],
+			'dirs' => [
+				'create' => true,
+				'delete' => true,
+				'rename' => true,
+			],
+		],
+		'types'=>[
+			'files'    =>  "",        
+			'images'   =>  "*img",
+		],
+		'thumbWidth' => 200,
+		'thumbHeight' => 200,        
+	]);
 
-// Set kcfinder session options
-Yii::$app->session->set('KCFINDER', $kcfOptions);
-
+	// Set kcfinder session options
+	Yii::$app->session->set('KCFINDER', $kcfOptions);
+}
 
 /* @var $this yii\web\View */
 /* @var $model amilna\blog\models\Banner */
@@ -126,26 +128,40 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 				<div class="row">
 					<div class="col-sm-6 ">
 						<?php 
-							echo $form->field($model, 'image')->widget(KCFinderInputWidget::className(), [
-								'multiple' => false,
-								'kcfOptions'=>$kcfOptions,	
-								'kcfBrowseOptions'=>[
-									'type'=>'images',
-									'lng'=>substr(Yii::$app->language,0,2),				
-								]	
-							]);	
+							if ($module->enableUpload)
+							{
+								echo $form->field($model, 'image')->widget(KCFinderInputWidget::className(), [
+									'multiple' => false,
+									'kcfOptions'=>$kcfOptions,	
+									'kcfBrowseOptions'=>[
+										'type'=>'images',
+										'lng'=>substr(Yii::$app->language,0,2),				
+									]	
+								]);	
+							}
+							else
+							{
+								echo $form->field($model, 'image')->textInput(['placeholder'=>Yii::t('app','Url of image')]);
+							}	
 						?>							
 					</div>
 					<div class="col-sm-6 ">	
-						<?php 
-							echo $form->field($model, 'front_image')->widget(KCFinderInputWidget::className(), [
-								'multiple' => false,
-								'kcfOptions'=>$kcfOptions,	
-								'kcfBrowseOptions'=>[
-									'type'=>'images',
-									'lng'=>substr(Yii::$app->language,0,2),				
-								]	
-							]);	
+						<?php
+							if ($module->enableUpload)
+							{
+								echo $form->field($model, 'front_image')->widget(KCFinderInputWidget::className(), [
+									'multiple' => false,
+									'kcfOptions'=>$kcfOptions,	
+									'kcfBrowseOptions'=>[
+										'type'=>'images',
+										'lng'=>substr(Yii::$app->language,0,2),				
+									]	
+								]);	
+							}
+							else
+							{
+								echo $form->field($model, 'front_image')->textInput(['placeholder'=>Yii::t('app','Url of image')]);
+							}
 						?>	
 					</div>
 				</div>	

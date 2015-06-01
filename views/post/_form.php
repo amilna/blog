@@ -13,35 +13,38 @@ use amilna\blog\models\Category;
 use iutbay\yii2kcfinder\KCFinderInputWidget;
 
 $module = Yii::$app->getModule('blog');
-// kcfinder options
-// http://kcfinder.sunhater.com/install#dynamic
-$kcfOptions = array_merge([], [
-    'uploadURL' => Yii::getAlias($module->uploadURL),
-    'uploadDir' => Yii::getAlias($module->uploadDir),
-    'access' => [
-        'files' => [
-            'upload' => true,
-            'delete' => false,
-            'copy' => false,
-            'move' => false,
-            'rename' => false,
-        ],
-        'dirs' => [
-            'create' => true,
-            'delete' => false,
-            'rename' => false,
-        ],
-    ], 
-    'types'=>[
-		'files'    =>  "",        
-        'images'   =>  "*img",
-    ],     
-    'thumbWidth' => 260,
-    'thumbHeight' => 260,          
-]);
+if ($module->enableUpload)
+{
+	// kcfinder options
+	// http://kcfinder.sunhater.com/install#dynamic
+	$kcfOptions = array_merge([], [
+		'uploadURL' => Yii::getAlias($module->uploadURL),
+		'uploadDir' => Yii::getAlias($module->uploadDir),
+		'access' => [
+			'files' => [
+				'upload' => true,
+				'delete' => false,
+				'copy' => false,
+				'move' => false,
+				'rename' => false,
+			],
+			'dirs' => [
+				'create' => true,
+				'delete' => false,
+				'rename' => false,
+			],
+		], 
+		'types'=>[
+			'files'    =>  "",        
+			'images'   =>  "*img",
+		],     
+		'thumbWidth' => 260,
+		'thumbHeight' => 260,          
+	]);
 
-// Set kcfinder session options
-Yii::$app->session->set('KCFINDER', $kcfOptions);
+	// Set kcfinder session options
+	Yii::$app->session->set('KCFINDER', $kcfOptions);
+}	
 
 /* @var $this yii\web\View */
 /* @var $model amilna\blog\models\Post */
@@ -75,16 +78,10 @@ foreach ($model->blogCatPos as $c)
 			<?= $form->field($model, 'description')->textArea(['maxlength' => 155,'placeholder'=>Yii::t('app','This description also used as meta description')]) ?>
 
 			<?php 
-			use vova07\imperavi\Widget;
-			echo $form->field($model, 'content')->widget(Widget::className(), [
-				'settings' => [
+			$isettings = [
 					'lang' => substr(Yii::$app->language,0,2),
 					'minHeight' => 400,
-					'toolbarFixedTopOffset'=>50,			
-					'imageUpload' => Url::to(['//blog/default/image-upload']),
-					'imageManagerJson' => Url::to(['//blog/default/images-get']),			
-					'fileUpload' => Url::to(['//blog/default/file-upload']),
-					'fileManagerJson' => Url::to(['//blog/default/files-get']),
+					'toolbarFixedTopOffset'=>50,								
 					'plugins' => [				
 						'imagemanager',
 						'filemanager',
@@ -96,7 +93,21 @@ foreach ($model->blogCatPos as $c)
 					'buttons'=> ['formatting', 'bold', 'italic','underline','deleted', 'unorderedlist', 'orderedlist',
 					  'outdent', 'indent', 'image', 'file', 'link', 'alignment', 'horizontalrule'
 					]
-				],
+				];
+				
+			if ($module->enableUpload)
+			{
+				$isettings = array_merge($isettings,[
+								'imageUpload' => Url::to(['//yes/default/image-upload']),								
+								'fileUpload' => Url::to(['//yes/default/file-upload']),
+								'imageManagerJson' => Url::to(['//yes/default/images-get']),			
+								'fileManagerJson' => Url::to(['//yes/default/files-get']),
+							]);
+			}
+				
+			use vova07\imperavi\Widget;
+			echo $form->field($model, 'content')->widget(Widget::className(), [
+				'settings' => $isettings,
 				'options'=>["style"=>"width:100%"]
 			]);
 			?>
@@ -152,15 +163,21 @@ foreach ($model->blogCatPos as $c)
 				?>
 				
 				<?php 
-
-				echo $form->field($model, 'image')->widget(KCFinderInputWidget::className(), [
-					'multiple' => false,
-					'kcfOptions'=>$kcfOptions,					
-					'kcfBrowseOptions'=>[
-						'type'=>'images',
-						'lng'=>substr(Yii::$app->language,0,2),				
-					]					
-				]);
+				if ($module->enableUpload)
+				{
+					echo $form->field($model, 'image')->widget(KCFinderInputWidget::className(), [
+						'multiple' => false,
+						'kcfOptions'=>$kcfOptions,					
+						'kcfBrowseOptions'=>[
+							'type'=>'images',
+							'lng'=>substr(Yii::$app->language,0,2),				
+						]					
+					]);
+				}
+				else
+				{
+					echo $form->field($model, 'image')->textInput(['placeholder'=>Yii::t('app','Url of image')]);	
+				}
 				
 				?>	
 			</div>				

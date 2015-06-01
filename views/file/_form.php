@@ -13,38 +13,41 @@ use kartik\datetime\DateTimePicker;
 use iutbay\yii2kcfinder\KCFinderInputWidget;
 
 $module = Yii::$app->getModule('blog');
-// kcfinder options
-// http://kcfinder.sunhater.com/install#dynamic
-$kcfOptions = array_merge([], [
-    'uploadURL' => Yii::getAlias($module->uploadURL),
-    'uploadDir' => Yii::getAlias($module->uploadDir),
-    'access' => [
-        'files' => [
-            'upload' => true,
-            'delete' => false,
-            'copy' => false,
-            'move' => false,
-            'rename' => false,
-        ],
-        'dirs' => [
-            'create' => true,
-            'delete' => false,
-            'rename' => false,
-        ],
-    ],  
-    'types'=>[
-		'files'    =>  "",        
-        'images'   =>  "*img",
-        'videos'   =>  "ogg flv mp4",
-    ],
-    'thumbWidth' => 200,
-    'thumbHeight' => 200,              
-]);
 
-// Set kcfinder session options
-Yii::$app->session->set('KCFINDER', $kcfOptions);
+if ($module->enableUpload)
+{
+	// kcfinder options
+	// http://kcfinder.sunhater.com/install#dynamic
+	$kcfOptions = array_merge([], [
+		'uploadURL' => Yii::getAlias($module->uploadURL),
+		'uploadDir' => Yii::getAlias($module->uploadDir),
+		'access' => [
+			'files' => [
+				'upload' => true,
+				'delete' => false,
+				'copy' => false,
+				'move' => false,
+				'rename' => false,
+			],
+			'dirs' => [
+				'create' => true,
+				'delete' => false,
+				'rename' => false,
+			],
+		],  
+		'types'=>[
+			'files'    =>  "",        
+			'images'   =>  "*img",
+			'videos'   =>  "ogg flv mp4",
+		],
+		'thumbWidth' => 200,
+		'thumbHeight' => 200,              
+	]);
 
+	// Set kcfinder session options
+	Yii::$app->session->set('KCFINDER', $kcfOptions);
 
+}
 /* @var $this yii\web\View */
 /* @var $model amilna\blog\models\Gallery */
 /* @var $form yii\widgets\ActiveForm */
@@ -100,14 +103,21 @@ Yii::$app->session->set('KCFINDER', $kcfOptions);
 			<div class="row">
 				<div class="col-md-12">
 				<?php 
-					echo $form->field($model, 'file')->widget(KCFinderInputWidget::className(), [
-						'multiple' => false,
-						'kcfOptions'=>$kcfOptions,	
-						'kcfBrowseOptions'=>[
-							'type'=>'files',
-							'lng'=>substr(Yii::$app->language,0,2),				
-						]	
-					]);	
+					if ($module->enableUpload)
+					{
+						echo $form->field($model, 'file')->widget(KCFinderInputWidget::className(), [
+							'multiple' => false,
+							'kcfOptions'=>$kcfOptions,	
+							'kcfBrowseOptions'=>[
+								'type'=>'files',
+								'lng'=>substr(Yii::$app->language,0,2),				
+							]	
+						]);	
+					}
+					else
+					{
+						echo $form->field($model, 'file')->textInput(['placeholder'=>Yii::t('app','Url of file')]);		
+					}
 				?>							
 				</div>				
 			</div>
