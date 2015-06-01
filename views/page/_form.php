@@ -127,7 +127,7 @@ if ($module->enableUpload)
 					'data'=>$model->getTags(),
 					'pluginOptions' => [
 						'tags' => true,
-						'tokenSeparators'=>[',',' '],
+						'tokenSeparators'=>[','],
 					],
 				]) ?>										
 				
