@@ -27,12 +27,12 @@ class FileSearch extends File
         ];
     }
 
-	/* uncomment to undisplay deleted records (assumed the table has column isdel)
+	/* uncomment to undisplay deleted records (assumed the table has column isdel) */
 	public static function find()
 	{
 		return parent::find()->where([File::tableName().'.isdel' => 0]);
 	}
-	*/
+	
 
     /**
      * @inheritdoc
