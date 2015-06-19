@@ -212,9 +212,19 @@ class PostSearch extends Post
 		{			
 			
 			$term = ($this->term?$this->term:$this->category);
-			$cquery =  $this->find()	
-					->select(["array_agg(".$this->tableName().".id)"])					
-					->leftJoin(BlogCatPos::tableName()." as cp",$this->tableName().".id = cp.post_id")
+			
+			$dsn = $this->db->dsn;
+			$cquery =  $this->find();	
+			if (strtolower(substr($dsn,0,5)) == "mysql")
+			{				
+				$cquery->select(["GROUP_CONCAT(".$this->tableName().".id)"]);	
+			}
+			else
+			{				
+				$cquery->select(["array_agg(".$this->tableName().".id)"]);
+			}	
+									
+			$cquery->leftJoin(BlogCatPos::tableName()." as cp",$this->tableName().".id = cp.post_id")
 					->leftJoin(Category::tableName()." as c","cp.category_id = c.id");										
 					
 			if ($this->category)
