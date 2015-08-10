@@ -242,7 +242,7 @@ class PostSearch extends Post
 			if ($this->category)
 			{
 				//$query->andFilterWhere(["OR","false",$this->tableName().".id = ANY ('".$res."')"]);
-				$query->andFilterWhere(["OR","false","concat(',',".$this->tableName().".id,',') LIKE '%,".str_replace(['{','}'],'',$res).",%'"]);								
+				$query->andFilterWhere(["OR","false","',".str_replace(["{","}"],"",$res).",' like concat('%,',".$this->tableName().".id,',%') "]);								
 			}
 			else
 			{		
@@ -251,7 +251,7 @@ class PostSearch extends Post
 						["OR","lower(tags) like '%".strtolower($this->term)."%'",
 							["OR","lower(content) like '%".strtolower($this->term)."%'",
 								//$this->tableName().".id = ANY ('".$res."')"
-								"concat(',',".$this->tableName().".id,',') LIKE '%,".str_replace(['{','}'],'',$res).",%'"								
+								"',".str_replace(["{","}"],"",$res).",' like concat('%,',".$this->tableName().".id,',%') "		
 							]
 						]
 					]
