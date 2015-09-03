@@ -98,10 +98,10 @@ foreach ($model->blogCatPos as $c)
 			if ($module->enableUpload)
 			{
 				$isettings = array_merge($isettings,[
-								'imageUpload' => Url::to(['//yes/default/image-upload']),								
-								'fileUpload' => Url::to(['//yes/default/file-upload']),
-								'imageManagerJson' => Url::to(['//yes/default/images-get']),			
-								'fileManagerJson' => Url::to(['//yes/default/files-get']),
+								'imageUpload' => Url::to(['//blog/default/image-upload']),								
+								'fileUpload' => Url::to(['//blog/default/file-upload']),
+								'imageManagerJson' => Url::to(['//blog/default/images-get']),			
+								'fileManagerJson' => Url::to(['//blog/default/files-get']),
 							]);
 			}
 				
