@@ -166,7 +166,7 @@ if ($module->enableUpload)
 					</div>
 				</div>	
 			
-				<?/*= $form->field($model, 'type')->textInput() */?>
+				<?php /* echo $form->field($model, 'type')->textInput(); */?>
 			</div>
 		</div>	
     </div>		    
