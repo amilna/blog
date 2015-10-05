@@ -36,6 +36,7 @@ class FileController extends Controller
         $searchModel = new FileSearch();                
         $req = Yii::$app->request->queryParams;
         if ($term) { $req[basename(str_replace("\\","/",get_class($searchModel)))]["term"] = $term;}        
+        $req[basename(str_replace("\\","/",get_class($searchModel)))]["status"] = 1;
         $dataProvider = $searchModel->search($req);	
 
         if ($format == 'json')
