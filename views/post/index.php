@@ -27,8 +27,8 @@ $dataProvider->pagination = [
 		//'summary'=>Yii::t('app','List of account codes where increase on receipt or revenues'),		
 		'itemView'=>'_itemIndex',
 		'options' => ['class' => 'row text-center list-view'],		
-		'layout'=>"{items}\n{pager}",
-		'pager' => ['class' => \kop\y2sp\ScrollPager::className()],
+		'layout'=>"{items}<div class='row'></div>{pager}",
+		//'pager' => ['class' => \kop\y2sp\ScrollPager::className()],
 	]) ?>	
 
 </div>

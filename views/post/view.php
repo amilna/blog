@@ -38,7 +38,11 @@ $cat = new Category();
 					?>					
 				</div>
 				<div>
-					<?= HtmlPurifier::process($model->content) ?>
+					<?= HtmlPurifier::process($model->content,[
+						'HTML.SafeIframe'=>true,
+						'URI.SafeIframeRegexp'=>'%^http(s)?://(www.youtube.com/embed/|player.vimeo.com/video/|'.str_replace(['http://','https://'],'',Yii::$app->params['backendURL']).')%'
+					]) ?>
+					
 				</div>				
 			</div>
 		</div>
@@ -96,7 +100,7 @@ $cat = new Category();
 						echo '<li>'.Html::a(date('M Y',strtotime($m["month"])),["//blog/post/index","time"=>$m["month"]]).'</li>';
 					}				
 				?>				
-			</ul>
+			</ul>			
 		</div>
 		<!-- End Sidebar -->
 	</div>
