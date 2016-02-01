@@ -77,7 +77,9 @@ class PostController extends Controller
 				{	
 					array_push($model,$obj);
 				}
-			}			
+			}
+			header("Access-Control-Allow-Origin: *");
+			header("Access-Control-Expose-Headers: X-Pagination-Per-Page,X-Pagination-Current-Page,X-Pagination-Page-Count,X-Pagination-Total-Count,Content-Type,Location");
 			return \yii\helpers\Json::encode($model);	
 		}
 		else
