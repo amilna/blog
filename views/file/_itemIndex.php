@@ -23,3 +23,14 @@ $module = Yii::$app->getModule('blog');
 		</div>
 	</div>
 
+<?php
+	if (($index+1) % 3 == 0)
+	{
+		echo '</div><div class="clearfix visible-sm-block">';	
+	}
+	
+	if (($index+1) % 4 == 0)
+	{
+		echo '</div><div class="clearfix visible-md-block visible-lg-block">';	
+	}
+?>

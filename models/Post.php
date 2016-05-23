@@ -157,7 +157,7 @@ class Post extends \yii\db\ActiveRecord
 	
 	public function getRecent($limit = 5)
 	{
-		return PostSearch::find()->orderBy('id desc')->limit($limit)->all();		
+		return PostSearch::find()->andWhere('status = 1')->orderBy('id desc')->limit($limit)->all();		
 	}
 	
 	public function getArchived($limit = 6)

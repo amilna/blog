@@ -151,8 +151,7 @@ if ($module->enableUpload)
 					</div>					
 				</div>
 			</div>
-			
-			<?php /* echo $form->field($model, 'type')->textInput(); */?>
+						
 			</div>	
 		</div>	
     </div>	
@@ -164,7 +163,7 @@ if ($module->enableUpload)
     <?php ActiveForm::end(); ?>
 
 </div>
-					{					
+					
 
 <script type="text/javascript">
 	
@@ -203,7 +202,6 @@ $('#videos .kcf-thumbs').bind("DOMSubtreeModified",function(){
 
 
 var video = "<?= $model->url?>";
-//var thumb = "<?= Yii::$app->assetManager->getPublishedUrl((new \iutbay\yii2kcfinder\KCFinderAsset)->sourcePath) ?>/themes/default/img/files/big/<?= substr($model->url,-3)?>.png";
 var thumb = "<?= Yii::$app->assetManager->getPublishedUrl((new \iutbay\yii2kcfinder\KCFinderAsset)->sourcePath) ?>/themes/default/img/files/big/flv.png";
 if (video != "")
 {

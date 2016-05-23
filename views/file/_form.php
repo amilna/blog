@@ -24,15 +24,15 @@ if ($module->enableUpload)
 		'access' => [
 			'files' => [
 				'upload' => true,
-				'delete' => false,
-				'copy' => false,
-				'move' => false,
-				'rename' => false,
+				'delete' => true,
+				'copy' => true,
+				'move' => true,
+				'rename' => true,
 			],
 			'dirs' => [
 				'create' => true,
-				'delete' => false,
-				'rename' => false,
+				'delete' => true,
+				'rename' => true,
 			],
 		],  
 		'types'=>[
@@ -80,7 +80,8 @@ if ($module->enableUpload)
 				'data'=>$model->getTags(),
 				'pluginOptions' => [
 					'tags' => true,
-					'tokenSeparators'=>[',',' '],
+					'multiple'=>true,
+					'tokenSeparators'=>[','],
 				],
 			]) ?>					
 		</div>	
@@ -88,12 +89,11 @@ if ($module->enableUpload)
 		<div class="col-md-6">
 			<div class="well">
 			<?= $form->field($model, 'time')->widget(DateTimePicker::classname(), [				
-					'options' => ['placeholder' => 'Select media time ...','readonly'=>true],
+					'options' => ['placeholder' => 'Select file time ...','readonly'=>true],
 					'removeButton'=>false,
 					'convertFormat' => true,
 					'pluginOptions' => [
-						'format' => 'yyyy-MM-dd HH:i:s',
-						//'startDate' => '01-Mar-2014 12:00 AM',
+						'format' => 'yyyy-MM-dd HH:i:s',						
 						'todayHighlight' => true
 					]
 				]) 
@@ -121,8 +121,7 @@ if ($module->enableUpload)
 				?>							
 				</div>				
 			</div>
-			
-			<?/*= $form->field($model, 'type')->textInput() */?>
+						
 			</div>	
 		</div>	
     </div>	

@@ -28,7 +28,7 @@ $dataProvider->pagination = [
 		'itemView'=>'_itemIndex',
 		'options' => ['class' => 'row text-center list-view'],		
 		'layout'=>"{items}\n{pager}",
-		'pager' => ['class' => \kop\y2sp\ScrollPager::className()],
+		//'pager' => ['class' => \kop\y2sp\ScrollPager::className()],
 	]) ?>	
 
 </div>

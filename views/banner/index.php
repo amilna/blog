@@ -17,12 +17,80 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $module = Yii::$app->getModule('blog');
 ?>
+<style>
+td img {
+	max-width:200px!important;	
+}
+</style>
 <div class="banner-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>                               
     
-    <?= SequenceJs::widget([
+    <?php 
+        
+    echo SequenceJs::widget([
+			'dataProvider'=>$bannerProvider, // active data provider
+			'targetId'=>'sequence',	//id of rendered sequencejs (the container will constructed by the widget with the given id)
+			'imageKey'=>'front_image', //model attribute to be used as image
+			'backgroundKey'=>'image', //model attribute to be used as background
+			'theme' => 'modern', //available themes: default, parallax, modern			
+			'options'=>[
+					'pagination'=> true,
+					'autoPlay'=> true,
+					'autoPlayDelay'=> 3000,
+					'cycle'=>true,										
+					'preloader'=> true,				
+				],
+			
+			/*	example to overide default options	more options on http://sequencejs.com 
+			'options'=>[
+					'autoPlay'=> true,
+					'autoPlayDelay'=> 3000,
+					'cycle'=>true,						
+					'nextButton'=> true,
+					'prevButton'=> true,
+					'preloader'=> true,
+					'navigationSkip'=> false
+				],		
+			 */
+				
+			/*	example to use widget without active data provider (the target selector should already rendered)
+			'targets' => [
+				'.sequencejs' => [
+					'autoPlay'=> true,
+					'autoPlayDelay'=> 3000,
+					'cycle'=>true,						
+					'nextButton'=> true,
+					'prevButton'=> true,
+					'preloader'=> true,
+					'navigationSkip'=> false
+				],
+			],
+			*/ 		
+				
+			'itemView'=>function ($model, $key, $widget) {											
+							$html = '<li style="background-image:url('.$model->image.');'.(!empty($model->url)?'cursor:pointer;':'').'" '.(!empty($model->url)?'data-url="'.(substr($model->url,0,4) == "http"?$model->url:Yii::$app->urlManager->createUrl($model->url)).'"':'').'>
+										'.(!$model->image_only?'			
+										<h2 class="title">'.Html::encode($model->title).'</h2>						
+										<h3 class="subtitle">'.Html::encode($model->description).'</h3>':'').'
+										<img class="model" src="'.($model->front_image == null?"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=":$model->front_image).'" />								
+									</li>';						
+											
+							return $html;
+						},
+			'itemPager' => function ($model, $key, $widget) {											
+							$html = '<li><img src="'.$model->image.'" alt="'.$key.'" style="max-width:40px;max-height:40px;"/></li>';										
+							return $html;
+						},
+																	
+		]);
+    
+    /* 
+    
+    //another example use parallax theme
+        
+	echo SequenceJs::widget([
 		'dataProvider'=>$bannerProvider, // active data provider
 		'targetId'=>'sequence',	//id of rendered sequencejs (the container will constructed by the widget with the given id)
 		'imageKey'=>'front_image', //model attribute to be used as image
@@ -31,7 +99,7 @@ $module = Yii::$app->getModule('blog');
 		
 		//'css' => 'test.css', // url of css to overide default css relative from @web
 		
-		/* example to overide default themes */		
+		// example to overide default themes
 		'itemView'=>function ($model, $key, $widget) {					
 						$type = ['aeroplane','balloon','kite'];
 						$html = '<li>'.($model->image_only?"":'
@@ -44,48 +112,19 @@ $module = Yii::$app->getModule('blog');
 								</li>';
 										
 						return $html;
-					},
-		 
+					},		 				
 		
-		/*	example to overide default options	more options on http://sequencejs.com 
-		'options'=>[
-				'autoPlay'=> true,
-				'autoPlayDelay'=> 3000,
-				'cycle'=>true,						
-				'nextButton'=> true,
-				'prevButton'=> true,
-				'preloader'=> true,
-				'navigationSkip'=> false
-			],		
-		 */
-		 	
-		/*	example to use widget without active data provider (the target selector should already rendered)
-		'targets' => [
-			'.sequencejs' => [
-				'autoPlay'=> true,
-				'autoPlayDelay'=> 3000,
-				'cycle'=>true,						
-				'nextButton'=> true,
-				'prevButton'=> true,
-				'preloader'=> true,
-				'navigationSkip'=> false
-			],
-		],
-		*/ 
-		
-	]) ?>    
-    
-    <p>
-        <?= Html::a(Yii::t('app', 'Create {modelClass}', [
-			'modelClass' => Yii::t('app','Banner'),
-		]), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+	]) 
+	*/ 
+	
+	?>  
+	            
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         
         'containerOptions' => ['style'=>'overflow: auto'], // only set when $responsive = false		
-		'caption'=>Yii::t('app', 'Banner'),
+		//'caption'=>Yii::t('app', 'Banner'),
 		'headerRowOptions'=>['class'=>'kartik-sheet-style','style'=>'background-color: #fdfdfd'],
 		'filterRowOptions'=>['class'=>'kartik-sheet-style skip-export','style'=>'background-color: #fdfdfd'],
 		'pjax' => true,
@@ -93,21 +132,31 @@ $module = Yii::$app->getModule('blog');
 		'striped' => true,
 		'condensed' => true,
 		'responsive' => true,
+		'responsiveWrap' => false,
 		'hover' => true,
 		'showPageSummary' => true,
 		'pageSummaryRowOptions'=>['class'=>'kv-page-summary','style'=>'background-color: #fdfdfd'],
-		
+		'tableOptions'=>["style"=>"margin-bottom:100px;"],				
 		'panel' => [
 			'type' => GridView::TYPE_DEFAULT,
-			'heading' => false,
-		],
-		'toolbar' => [
-			['content'=>				
+			'heading' => '<i class="glyphicon glyphicon-th-list"></i>  '.Yii::t('app', 'Banner'),			
+			'before'=>Html::a(
+					'<i class="glyphicon glyphicon-plus"></i> '.Yii::t('app', 'Create'),
+					['create'], 
+					[	'class' => 'btn btn-success', 
+						'title'=>Yii::t('app', 'Create {modelClass}', [
+							'modelClass' => Yii::t('app','Banner'),
+						])
+					]
+				).' <em style="margin:10px;"><small>'.Yii::t('app', 'Type in column input below to filter, or click column title to sort').'</small></em>',
+		],				
+		'toolbar' => [			
+			['content'=>								
 				Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['index'], ['data-pjax'=>true, 'class' => 'btn btn-default', 'title'=>Yii::t('app', 'Reset Grid')])
 			],
 			'{export}',
-			'{toggleData}'
-		],
+			//'{toggleData}'
+		],		
 		'beforeHeader'=>[
 			[
 				/* uncomment to use additional header
@@ -119,9 +168,9 @@ $module = Yii::$app->getModule('blog');
 				'options'=>['class'=>'skip-export'] // remove this row from export
 			]
 		],
-		'floatHeader' => true,		
-		
-		/* uncomment to use megeer some columns
+		'floatHeader' => true,				
+		'floatHeaderOptions'=>['position'=>'absolute','top'=>50],
+		/*uncomment to use merger some columns
         'mergeColumns' => ['Column 1','Column 2','Column 3'],
         'type'=>'firstrow', // or use 'simple'
         */
@@ -134,10 +183,10 @@ $module = Yii::$app->getModule('blog');
 				'attribute' => 'term',
 				'format'=>'html',
 				'value' => function($data) use ($module) {
-					$html = Html::img(str_replace($module->uploadURL."/",$module->uploadURL."/.thumbs/",$data->image),['class'=>'pull-left','style'=>'margin:0 10px 10px 0']);
+					$html = Html::img(str_replace($module->uploadURL."/",$module->uploadURL."/.thumbs/",$data->image),['class'=>'pull-left','style'=>'margin:0px 10px 10px 0px;']);
 					if (!empty($data->front_image))
 					{
-						$html .= Html::img(str_replace($module->uploadURL."/",$module->uploadURL."/.thumbs/",$data->front_image),['class'=>'pull-left','style'=>'margin:0 10px 10px 0']);
+						$html .= Html::img(str_replace($module->uploadURL."/",$module->uploadURL."/.thumbs/",$data->front_image),['class'=>'pull-left','style'=>'margin:0px 10px 10px 0px;']);
 					}
 					return $html;
 				},
