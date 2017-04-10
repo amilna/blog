@@ -28,8 +28,9 @@ td img {
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>                               
     
     <?php 
+    // add echo to print
         
-    echo SequenceJs::widget([
+    SequenceJs::widget([
 			'dataProvider'=>$bannerProvider, // active data provider
 			'targetId'=>'sequence',	//id of rendered sequencejs (the container will constructed by the widget with the given id)
 			'imageKey'=>'front_image', //model attribute to be used as image

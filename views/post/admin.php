@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				*/
 				'options'=>['class'=>'skip-export'] // remove this row from export
 			]
-		],
+		],						
 		'floatHeader' => true,		
 		'floatHeaderOptions'=>['position'=>'absolute','top'=>50],
 		/*uncomment to use megeer some columns

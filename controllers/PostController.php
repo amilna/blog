@@ -40,7 +40,10 @@ class PostController extends Controller
         if ($category) { $req[basename(str_replace("\\","/",get_class($searchModel)))]["category"] = $category;}        
         if ($time) { $req[basename(str_replace("\\","/",get_class($searchModel)))]["time"] = $time;}
         $dataProvider = $searchModel->search($req);				
-
+		        
+        $query = $dataProvider->query;
+        $query->andWhere(['status'=>[1]]);	
+        
         if ($format == 'json')
         {
 			$model = [];
@@ -96,7 +99,8 @@ class PostController extends Controller
         $searchModel = new PostSearch();        
         $req = Yii::$app->request->queryParams;
         if ($term) { $req[basename(str_replace("\\","/",get_class($searchModel)))]["term"] = $term;}        
-        $dataProvider = $searchModel->search($req);				
+        $dataProvider = $searchModel->search($req);		
+	
 
         if ($format == 'json')
         {

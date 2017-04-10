@@ -49,8 +49,8 @@ if ($model["type"] == 1 )
 ?>
 
 	<div class="thumbnail">
-		<div class="col-xs-12" style="background-color:black;">
-		<div class="row">
+		<div class="col-xs-12" style="background-color:black;margin-bottom:10px;">
+			<div class="row">
 			
 			<?php				
 				if (count($model['data']) == 1 && $model["type"] > (-1) )
@@ -96,7 +96,7 @@ if ($model["type"] == 1 )
 			</div>			
 		</div>			
 										
-		<div class="caption">
+		<div class="caption">			
 			<h4><?= $model["type"] == 1?'<i class="fa fa-film"></i>':''?> <?= Html::a($model['title'],$durl,["class"=>'h'.$class]) ?></h4>
 			<h5><?= $model['description'].(!empty($model['description'])?"<br>":"") ?>
 			<small><?= $model['tags'] ?></small>

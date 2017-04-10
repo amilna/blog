@@ -43,6 +43,7 @@ class File extends \yii\db\ActiveRecord
             [['tags','time'], 'safe'],
             [['title'], 'string', 'max' => 65],
             [['description'], 'string', 'max' => 155],
+            ['title', 'match', 'pattern' => '/^[a-zA-Z0-9 \-\(\)]+$/', 'message' => 'Title can only contain alphanumeric characters, spaces and dashes.'],
             //[['tags'], 'string', 'max' => 255]
         ];
     }

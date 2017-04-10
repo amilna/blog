@@ -23,15 +23,15 @@ if ($module->enableUpload)
 		'access' => [
 			'files' => [
 				'upload' => true,
-				'delete' => false,
-				'copy' => false,
-				'move' => false,
-				'rename' => false,
+				'delete' => true,
+				'copy' => true,
+				'move' => true,
+				'rename' => true,
 			],
 			'dirs' => [
 				'create' => true,
-				'delete' => false,
-				'rename' => false,
+				'delete' => true,
+				'rename' => true,
 			],
 		], 
 		'types'=>[
@@ -119,6 +119,7 @@ foreach ($model->blogCatPos as $c)
 						'removeButton'=>false,
 						'convertFormat' => true,
 						'pluginOptions' => [
+							'autoclose'=>true,
 							'format' => 'yyyy-MM-dd HH:i:s',
 							//'startDate' => '01-Mar-2014 12:00 AM',
 							'todayHighlight' => true,							

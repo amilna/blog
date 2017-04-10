@@ -12,8 +12,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $module = Yii::$app->getModule('blog');
 ?>
+<style>
+	.banner-view .thumbnail {
+		max-width:100%!important;	
+	}
+</style>
 <div class="banner-view">
-
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>

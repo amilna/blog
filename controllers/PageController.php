@@ -98,6 +98,10 @@ class PageController extends Controller
     public function actionView($id,$format= false)
     {
         $model = $this->findModel($id);
+        if ($model->status != 1)
+        {
+			return $this->redirect(['index']);
+		}
         
         if ($format == 'json')
         {

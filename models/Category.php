@@ -45,7 +45,8 @@ class Category extends \yii\db\ActiveRecord
             [['status'], 'boolean'],
             [['title'], 'string', 'max' => 65],
             [['image'], 'string', 'max' => 255],
-            [['title'], 'unique']
+            [['title'], 'unique'],
+            ['title', 'match', 'pattern' => '/^[a-zA-Z0-9 \-\(\)]+$/', 'message' => 'Title can only contain alphanumeric characters, spaces and dashes.'],
         ];
     }
 
@@ -134,6 +135,6 @@ class Category extends \yii\db\ActiveRecord
     
     public function	parents($id = false)
     {
-		return $this->findBySql("SELECT id,title FROM ".$this->tableName().($id?" WHERE id != :id":"")." order by title",($id?['id'=>$id]:[]))->all();
+		return $this->findBySql("SELECT id,title FROM ".$this->tableName().($id?" WHERE id != :id and status=true":" WHERE status=true")." order by title",($id?['id'=>$id]:[]))->all();
 	}	
 }

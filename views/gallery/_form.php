@@ -23,15 +23,15 @@ if ($module->enableUpload)
 		'access' => [
 			'files' => [
 				'upload' => true,
-				'delete' => false,
-				'copy' => false,
-				'move' => false,
-				'rename' => false,
+				'delete' => true,
+				'copy' => true,
+				'move' => true,
+				'rename' => true,
 			],
 			'dirs' => [
 				'create' => true,
-				'delete' => false,
-				'rename' => false,
+				'delete' => true,
+				'rename' => true,
 			],
 		],  
 		'types'=>[

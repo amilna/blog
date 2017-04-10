@@ -8,7 +8,7 @@ use yii\widgets\ListView;
 /* @var $searchModel amilna\blog\models\PostSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Posts');
+$this->title = (!empty($_GET["category"])?$_GET["category"]:Yii::t('app', 'Posts'));
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Blog'), 'url' => ['/blog/default']];
 $this->params['breadcrumbs'][] = $this->title;
 

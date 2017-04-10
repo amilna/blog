@@ -10,6 +10,8 @@
             "email": "iyo@amilna.com"
         }
     ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "yiisoft/yii2": "*",
 	"kartik-v/yii2-mpdf": "*",

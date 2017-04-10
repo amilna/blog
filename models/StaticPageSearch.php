@@ -189,6 +189,8 @@ class StaticPageSearch extends StaticPage
 		{
 			$query->andFilterWhere($p);
 		}				
+				
+		$res = (is_int($this->term)?"{".$this->term."}":"{}");
 		
 		if ($this->term)
 		{
