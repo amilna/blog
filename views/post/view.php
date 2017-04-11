@@ -40,7 +40,7 @@ $cat = new Category();
 				<div>
 					<?= HtmlPurifier::process($model->content,[
 						'HTML.SafeIframe'=>true,
-						'URI.SafeIframeRegexp'=>'%^http(s)?://(www.youtube.com/embed/|player.vimeo.com/video/|'.str_replace(['http://','https://'],'',Yii::$app->params['backendURL']).')%'
+						'URI.SafeIframeRegexp'=>'%^http(s)?://(www.youtube.com/embed/|player.vimeo.com/video/|'.str_replace(['http://','https://'],'',Yii::getAlias('@web')).')%'
 					]) ?>
 					
 				</div>				
