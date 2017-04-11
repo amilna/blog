@@ -111,7 +111,9 @@ $listParent = []+ArrayHelper::map(($model->isNewRecord?$model->parents():$model-
 				}	
 			?>							
 			
-			<?/*= $form->field($model, 'type')->textInput() */?>
+			<?php
+				/*= $form->field($model, 'type')->textInput() */
+			?>
 		</div>	
     </div>	
 	
